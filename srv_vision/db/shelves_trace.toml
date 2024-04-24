@@ -1,0 +1,44 @@
+title = "Shelves path Tracer"
+
+[[schemer]] 
+  aisle_index = 2 
+  clase = ["enlatados", "cocina"]  
+
+  [[schemer.shelves]] 
+    shelf_index = 1 
+
+    [[schemer.shelves.sections]]
+      section_index = 1
+      distances = [10, 10, 10]
+
+    [[schemer.shelves.sections]]
+      section_index = 2
+      distances = [40, 60, 10]
+
+[[schemer]]
+  aisle_index = 3 
+  clase = ["refrigerador"] 
+  
+  [[schemer.shelves]] 
+    enable = false 
+    shelf_index = 1 
+    
+    [[schemer.shelves.sections]]
+      section_index = 1
+      distances = [30, 30, 30]
+    [[schemer.shelves.sections]]
+      section_index = 2
+      distances = [15, 20, 20]
+    
+  [[schemer.shelves]]
+    shelf_index = 2 
+
+    [[schemer.shelves.sections]]
+      section_index = 1 
+      distances = [10, 50, 10, 10, 10] 
+    [[schemer.shelves.sections]]
+      section_index = 2
+      enable = false 
+      distances = [15, 15, 15] 
+
+
