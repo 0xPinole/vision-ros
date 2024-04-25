@@ -1,9 +1,10 @@
 """Manager for camera frames getter."""
 
 import cv2
+from camera_configuration import CamConfig
 
 
-class Camera:
+class Camera(CamConfig):
     """Class owner of camera."""
 
     def __init__(self):
@@ -17,6 +18,9 @@ class Camera:
         except ValueError:
             self.camera = None
 
+        if self.camera is not None:
+            self.flags_setter()
+
     def __enter__(self):
         """Logic created for ContextManager."""
         # Logic called before entry.
@@ -26,6 +30,11 @@ class Camera:
         """Logic for close class."""
         self.release()
         return True
+
+    def flags_setter(self):
+        """Set flags to self.camera from the configuration."""
+        for flag, value in self.video_flags:
+            self.camera.set(flag, value)
 
     def get_frame(self) -> list[list[int]]:
         """Read actual video frame."""
