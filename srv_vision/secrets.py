@@ -4,6 +4,5 @@
 class Credentials_aws:
     """Credentials for aws."""
 
-    _endpoint = (
-        "https://s3zfpd9nk1.execute-api.us-east-2.amazonaws.com/default/inventorylambda"
-    )
+    _endpoint_s1 = "aHR0cHM6Ly9zM3pmcGQ5bmsxLmV4ZWN1dGUtYXBpLnVzLWVhc3Qt"
+    _endpoint_s2 = "Mi5hbWF6b25hd3MuY29tL2RlZmF1bHQvaW52ZW50b3J5bGFtYmRh"
