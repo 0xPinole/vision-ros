@@ -1,6 +1,7 @@
 """File created to manage the AI model."""
 
-from store_manager import Logs
+# import numpy as np
+# from sklearn.cluster import MeanShift
 from ultralytics import YOLO
 
 
@@ -10,7 +11,7 @@ class Evaluation:
     def __init__(self):
         """WIP."""
         self.model = YOLO("models/ultralytics_yolov8_model.pt")
-        self.logger = Logs()
+        # self.mean_shift = MeanShift(bandwidth=None, bin_seeding=True)
 
     def evaluate(self, frame) -> list[list[int]]:
         """WIP."""
@@ -21,5 +22,12 @@ class Evaluation:
 
     def simplify(self, boxes: list[list[float]], cls: list[float]) -> list[list[str]]:
         """Search over boxes to relate."""
+        # cluster_array = np.reshape(boxes, (-1, 1))
+        # self.mean_shift.fit(cluster_array)
+        # cluster_centers = ms.cluster_centers_
+        # labels = self.mean_shift.labels_
+
+        # labels_unique = np.unique(labels)
+        # n_clusters_ = len(labels_unique)
         reduced_array = []
         return reduced_array
