@@ -1,5 +1,6 @@
 """WIP."""
 
+import base64
 from secrets import Credentials_aws
 
 import requests
@@ -31,7 +32,11 @@ class Client(Credentials_aws):
     def post(self, sender: dict[str, any]) -> str:
         """WIP."""
         try:
-            response = requests.post(self._endpoint, json=sender, headers=self.headers)
+            response = requests.post(
+                base64.b64decode(self._endpoint_s1 + self._endpoint_s2).decode("utf-8"),
+                json=sender,
+                headers=self.headers,
+            )
             response.raise_for_status()
         except requests.exceptions.RequestException as e:
             if hasattr(e, "response"):

@@ -1,6 +1,6 @@
 """WIP."""
 
-from aws_server import Client
+from aws_manager import Client
 from storage_manager import Logs, Products
 
 
