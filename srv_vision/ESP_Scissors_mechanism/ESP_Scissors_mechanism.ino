@@ -9,17 +9,11 @@
 #include <rcl/error_handling.h>
 #include <rclc/rclc.h>
 
-#define RIGHT_PIN 13 
-#define LEFT_PIN 12 
-#define PWM_PIN 15 
-#define encoder_a_pin 25 
-#define encoder_B_pin 23 
-
-const int EncA = 2; 
-const int EncB = 3;
-const int In1 = 4;
-const int In2 = 5;
-const int EnA = 11; //Salida PWM 
+const int EncA = 2; //25 
+const int EncB = 3; //23 
+const int In1 = 4;  //13 
+const int In2 = 5;  //12 
+const int EnA = 11; //15 - Salida PWM 
 
 std_msgs__msg__Int32 msg;
 rcl_subscription_t subscriber; 
@@ -28,10 +22,11 @@ rcl_allocator_t allocator;
 rclc_support_t support; 
 rcl_node_t node;
 
-#define RCCHECK(fn) { rcl_ret_t temp_rc = fn; if((temp_rc != RCL_RET_OK)){error_loop();}}
+#define RCCHECK(fn) { rcl_ret_t temp_rc = fn; if((temp_rc != RCL_RET_OK)){}}
 #define RCSOFTCHECK(fn) { rcl_ret_t temp_rc = fn; if((temp_rc != RCL_RET_OK)){}}
 
 int expected_position = 0;
+float error_position = 0;
 
 const float resolution = 0.0109986;
 
@@ -39,14 +34,6 @@ volatile int pwm_value = 50;
 volatile float position = 0; 
 volatile long counter = 0;
 volatile bool BSet = 0, ASet = 0;
-
-
-void error_loop(){
-  while(1){
-    digitalWrite(LED_PIN, !digitalRead(LED_PIN));
-    delay(100);
-  }
-}
 
 void setup(){
   set_microros_transports(); 
@@ -75,9 +62,9 @@ void setup(){
 void loop(){
   RCCHECK(rclc_executor_spin_some(&executor, RCL_MS_TO_NS(100)));
   
-  error_position = expected_position - pos; 
-  pwm_value = min(max(error_position * 30, 100), 0)
-  movement((error_position > 0.1), (error_position < 0.1) )
+  error_position = expected_position - position; 
+  pwm_value = min(max(error_position * 30,(float)100.0), (float)0.0); //needed to implement pid 
+  movement((error_position > 0.1), (error_position < 0.1) );
 }
 
 void movement(bool down, bool up){
@@ -90,8 +77,7 @@ void subscription_callback(const void * msgin){
   expected_position = msg -> data; 
 }
 
-
 void Encoder() {
   counter += (digitalReadFast(EncB) == digitalReadFast(EncA)) || -1;
-  pos = counter * resolution;
+  position = counter * resolution;
 }
