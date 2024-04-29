@@ -7,7 +7,7 @@ from rclpy.node import Node
 from std_msgs.msg import String
 from storage_manager import Logs, Shelves
 
-from ros_vision.srv import ScissorsMechanism, VisionParams
+from ros_vision.srv import ScissorsMechanismParams, VisionParams
 
 
 class VisionService(Node):
@@ -23,7 +23,7 @@ class VisionService(Node):
         )
 
         self.scissor_client = self.create_client(
-            ScissorsMechanism, "scissors_mechanism"
+            ScissorsMechanismParams, "scissors_mechanism"
         )
         while not self.scissor_client.wait_for_service(timeout_sec=1.0):
             self.get_logger().info("Error: Timeout response ScissorsMechanism")
@@ -33,7 +33,7 @@ class VisionService(Node):
         self.vision_model = Evaluation()
         self.logger = Logs()
 
-        self.scissors_request = ScissorsMechanism.Request()
+        self.scissors_request = ScissorsMechanismParams.Request()
 
     def procedure(self, request, response):
         """Main loop to run all needed procesess."""
