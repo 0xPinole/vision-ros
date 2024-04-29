@@ -9,10 +9,12 @@ title = "Shelves path Tracer"
 
     [[schemer.shelves.sections]]
       section_index = 1
+      aruco_id = 1 
       distances = [10, 10, 10]
 
     [[schemer.shelves.sections]]
       section_index = 2
+      aruco_id = 2 
       distances = [40, 60, 10]
 
 [[schemer]]
@@ -34,11 +36,17 @@ title = "Shelves path Tracer"
     shelf_index = 2 
 
     [[schemer.shelves.sections]]
-      section_index = 1 
+      section_index = 1
+      aruco_id = 1 
       distances = [10, 50, 10, 10, 10] 
     [[schemer.shelves.sections]]
       section_index = 2
-      enable = false 
+      aruco_id = 2 
       distances = [15, 15, 15] 
+    [[schemer.shelves.sections]]
+      section_index = 3 
+      enable = false 
+      distances = [10, 20, 20]
+    
 
 
