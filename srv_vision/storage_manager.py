@@ -71,6 +71,12 @@ class Shelves:
         distances = db_section.get("distances")
         return distances
 
+    def search_by_aruco_id(self, aruco_id: int) -> list[list[int]]:
+        """Search by the aruco_id to get the distances to go down."""
+        return [2, 1, 1]
+        # Return [[aisle, shelf, section], ...], should work with left and right
+        # by len(return) === 1 or 2
+
 
 class Products:
     """Class owner of storage products on json file."""
@@ -156,14 +162,18 @@ class Logs:
         with open("db/logger.json", "w") as fg:
             json.dump(logs_json, fg)
 
-    def insert_log(self, location: int, detections: list[list[str]]):
+    def save_logger(self):
+        """Save the actual logger."""
+        self._dump_logger(self.logs)
+
+    def insert_log(self, location: str, detections: list[list[str]]):
         """Insert at last if time diff is less than 3 hours, else insert new."""
         last_timestamp = datetime.datetime.strptime(
             self.logs["detections"][-1]["timestamp"], "%Y-%m-%d %H:%M:%S"
         )
         now = datetime.datetime.now()
 
-        if (now - last_timestamp).total_seconds() > 10800:
+        if (now - last_timestamp).total_seconds() > 10800:  # 3 hours
             now_str = now.strftime("%Y-%m-%d %H:%M:%S")
             self.logs["detections"].append(
                 {
