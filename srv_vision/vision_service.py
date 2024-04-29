@@ -23,7 +23,7 @@ class VisionService(Node):
         )
 
         self.scissor_client = self.create_client(
-            ScissorsMechanismParams, "scissors_mechanism"
+            ScissorsMechanismParams, "shift_scissors_mechanism"
         )
         while not self.scissor_client.wait_for_service(timeout_sec=1.0):
             self.get_logger().info("Error: Timeout response ScissorsMechanism")
@@ -56,6 +56,7 @@ class VisionService(Node):
         communication_msg.data = "POST"
         self.communication_publisher.publish(communication_msg)
         self.scissors_send_request(0)
+
         response.status_code = 2
 
         return response
