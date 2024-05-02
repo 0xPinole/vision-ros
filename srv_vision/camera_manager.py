@@ -1,7 +1,8 @@
 """Manager for camera frames getter."""
 
 import cv2
-from camera_configuration import CamConfig
+
+from srv_vision.camera_configuration import CamConfig
 
 
 class Camera(CamConfig):

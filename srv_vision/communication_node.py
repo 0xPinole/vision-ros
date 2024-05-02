@@ -2,10 +2,11 @@
 
 import json
 
-from aws_manager import Client
 from rclpy.node import Node
 from std_msgs.msg import String
-from storage_manager import Logs, Products
+
+from srv_vision.aws_manager import Client
+from srv_vision.storage_manager import Logs, Products
 
 
 class DataManager(Node):

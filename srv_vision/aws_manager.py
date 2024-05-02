@@ -1,9 +1,10 @@
 """WIP."""
 
 import base64
-from secrets import Credentials_aws
 
 import requests
+
+from srv_vision.secrets import Credentials_aws
 
 
 class Client(Credentials_aws):
