@@ -1,48 +1,95 @@
 #include <micro_ros_arduino.h>
 
-#include <digitalWriteFast.h>
-#include <std_msgs/msg/int32.h>
-
-#include <rclc/executor.h> 
 #include <stdio.h>
 #include <rcl/rcl.h>
-#include <rcl/error_handling.h>
 #include <rclc/rclc.h>
+#include <rclc/executor.h> 
+#include <rcl/error_handling.h>
 
-const int EncA = 2; //25 
-const int EncB = 3; //23 
-const int In1 = 4;  //13 
-const int In2 = 5;  //12 
-const int EnA = 11; //15 - Salida PWM 
+#include <std_msgs/msg/int32.h>
 
-std_msgs__msg__Int32 msg;
-rcl_subscription_t subscriber; 
+#include <digitalWriteFast.h>
+
+#include <ESP32Servo.h>
+
+const int EncA = 13;
+const int EncB = 15;
+const int In1 = 25;
+const int In2 = 26;
+
+const int ServoPin = 9; 
+
+std_msgs__msg__Int32 msg1;
+std_msgs__msg__Int32 msg2;
+std_msgs__msg__Int32 pub_msg;
+
+rcl_publisher_t publisher; 
+rcl_subscription_t subscriber1; 
+rcl_subscription_t subscriber2; 
 rclc_executor_t executor;
-rcl_allocator_t allocator;
 rclc_support_t support; 
+rcl_allocator_t allocator;
 rcl_node_t node;
+rcl_timer_t timer; 
 
-#define RCCHECK(fn) { rcl_ret_t temp_rc = fn; if((temp_rc != RCL_RET_OK)){}}
-#define RCSOFTCHECK(fn) { rcl_ret_t temp_rc = fn; if((temp_rc != RCL_RET_OK)){}}
+Servo servo_camera; 
+
+#define RCCHECK(fn) { rcl_ret_t temp_rc = fn; if((temp_rc != RCL_RET_OK)){printf("[!] RCCHECK");}}
+#define RCSOFTCHECK(fn) { rcl_ret_t temp_rc = fn; if((temp_rc != RCL_RET_OK)){printf("[!] RSOFTCHECK");}}
 
 int expected_position = 0;
-float error_position = 0;
+int camera_servo_angle = 0; 
+int error_position = 0;
 
-const float resolution = 0.0109986;
+const float resolution = 0.000571; //0.0109986
 
 volatile int pwm_value = 50; 
-volatile float position = 0; 
+volatile int position = 0; 
 volatile long counter = 0;
-volatile bool BSet = 0, ASet = 0;
+volatile bool direction = false;
+
+void publisher_callback(rcl_timer_t * timer, int64_t last_call_time)
+{  
+  RCLC_UNUSED(last_call_time);
+  if (timer != NULL) {
+    pub_msg.data = position; 
+    RCSOFTCHECK(rcl_publish(&publisher, &pub_msg, NULL));
+  }
+}
+
+void subscription_callback_scissors(const void * msgin){
+  const std_msgs__msg__Int32 * msg1 = (const std_msgs__msg__Int32 *)msgin; 
+  expected_position = msg1->data;  
+}
+
+void subscription_callback_servo(const void * msgin){
+  const std_msgs__msg__Int32 * msg2 = (const std_msgs__msg__Int32 *)msgin; 
+  camera_servo_angle = msg2->data; 
+  servo_camera.write(camera_servo_angle); 
+}
+
+void IRAM_ATTR handleInterrupt() {
+  bool r1 = digitalReadFast(EncA);
+  bool r2 = digitalReadFast(EncB);
+  if (r1 == r2) {
+    if (direction){
+      counter++;
+    }else{
+      counter--;
+    }
+  }
+  position = counter * resolution;
+  // needed to implement PID
+}
+
 
 void setup(){
   set_microros_transports(); 
-  pinMode(EnA, OUTPUT);                 //Salida de PWM      
   pinMode(In1, OUTPUT);                 //Pin declarado como salida para el motor
   pinMode(In2, OUTPUT);                 //Pin declarado como salida para el motor
   pinMode(EncA, INPUT_PULLUP);          //Pin declarado como entrada, señal A del encoder de cuadratura
   pinMode(EncB, INPUT_PULLUP);          //Pin declarado como entrada, señal B del encoder de cuadratura
-  attachInterrupt(0, Encoder, CHANGE);  //Leer señal A del encoder por interrupción, y asignar a Encoder 
+  // attachInterrupt(digitalPinToInterrupt(EncA), handleInterrupt, CHANGE);  //Leer señal A del encoder por interrupción, y asignar a Encoder 
 
   allocator = rcl_get_default_allocator();
 
@@ -50,34 +97,73 @@ void setup(){
   RCCHECK(rclc_node_init_default(&node, "scissors_motor", "", &support));
 
   RCCHECK(rclc_subscription_init_default(
-    &subscriber,
+    &subscriber1,
     &node,
     ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32),
-    "scissors-movement"));
+    "scissors_movement"));
+
+   RCCHECK(rclc_subscription_init_default(
+    &subscriber2,
+    &node,
+    ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32),
+    "scissors_angle"));
+
+  RCCHECK(rclc_publisher_init_default(
+    &publisher,
+    &node,
+    ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32),
+    "scissors_position"));
+
+  const unsigned int timer_timeout = 10; 
+  RCCHECK(rclc_timer_init_default(
+    &timer,
+    &support,
+    RCL_MS_TO_NS(timer_timeout),
+    publisher_callback));
   
-  RCCHECK(rclc_executor_init(&executor, &support.context, 1, &allocator));
-  RCCHECK(rclc_executor_add_subscription(&executor, &subscriber, &msg, &subscription_callback, ON_NEW_DATA));
+  RCCHECK(rclc_executor_init(&executor, &support.context, 3, &allocator));
+  RCCHECK(rclc_executor_add_subscription(&executor, &subscriber1, &msg1, &subscription_callback_scissors, ON_NEW_DATA));
+  RCCHECK(rclc_executor_add_subscription(&executor, &subscriber2, &msg2, &subscription_callback_servo, ON_NEW_DATA)); 
+  RCCHECK(rclc_executor_add_timer(&executor, &timer));
+
+  pub_msg.data = 0;
+  servo_camera.attach(ServoPin);
+
+  analogWrite(In1, 0);
+  analogWrite(In2, 120);
+  delay(300);
+  analogWrite(In1, 120);
+  analogWrite(In2, 0);
+  delay(300);
+  analogWrite(In1, 0);
+  analogWrite(In2, 0);
+  
+  servo_camera.write(0); 
+  delay(500);
+  servo_camera.write(180);
+  delay(500);
+  servo_camera.write(0); 
+
+  expected_position = 0; 
+  position = 0;
+}
+
+void movement(bool dir){
+  analogWrite(In1,  dir * pwm_value);
+  analogWrite(In2, !dir * pwm_value);
 }
 
 void loop(){
-  RCCHECK(rclc_executor_spin_some(&executor, RCL_MS_TO_NS(100)));
+  RCSOFTCHECK(rclc_executor_spin_some(&executor, RCL_MS_TO_NS(100)));
+  delay(10);
   
   error_position = expected_position - position; 
-  pwm_value = min(max(error_position * 30,(float)100.0), (float)0.0); //needed to implement pid 
-  movement((error_position > 0.1), (error_position < 0.1) );
-}
+  direction = (error_position > 0);
 
-void movement(bool down, bool up){
-  analogWrite(In1, pwm_value * down);
-  analogWrite(In2, pwm_value * up); 
-}
-
-void subscription_callback(const void * msgin){
-  const std_msgs__msg__Int32 * msg = (const std_msgs__msg__Int32 *)msgin; 
-  expected_position = msg -> data; 
-}
-
-void Encoder() {
-  counter += (digitalReadFast(EncB) == digitalReadFast(EncA)) || -1;
-  position = counter * resolution;
+  if(abs(error_position) > 2) {  
+    movement((error_position > 0));
+  } else {
+    analogWrite(In1, 0);
+    analogWrite(In2, 0);
+  }
 }
