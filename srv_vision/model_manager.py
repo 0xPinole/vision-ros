@@ -20,7 +20,9 @@ class Evaluation:
         reduce = self.simplify(result.boxes.xywh.numpy(), result.boxes.cls.numpy())
         return reduce
 
-    def simplify(self, boxes: list[list[float]], cls: list[float]) -> list[list[str]]:
+    def simplify(
+        self, boxes: list[list[float]], cls_prods: list[float]
+    ) -> list[list[str]]:
         """Search over boxes to relate."""
         # x_lines = boxes[:,1] + boxes[:,2]
         # x_lines = np.reshape(x_lines, (-1, 1))
@@ -28,7 +30,7 @@ class Evaluation:
         # cluster_centers = ms.cluster_centers_
         # labels = self.mean_shift.labels_
         #
-        labels_unique = np.unique(cls)
+        labels_unique = np.unique(cls_prods)
         # n_clusters_ = len(labels_unique)
         # reduced_array = []
         # cols = []
@@ -44,6 +46,6 @@ class Evaluation:
         reduced_array = {}
 
         for label in labels_unique:
-            reduced_array[label] = len(cls[cls == label])
+            reduced_array[label] = len(cls_prods[cls_prods == label])
 
         return reduced_array
