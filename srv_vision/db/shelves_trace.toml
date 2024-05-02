@@ -1,0 +1,40 @@
+{
+  "title": "Shelves path Tracer",
+
+  "aruco_ids": [[1,1,1], [1,1,2]], 
+
+  "schemer": [
+    {
+      "aisle_index": 1,
+      "shelves": [
+        {
+          "shelf_index": 1,
+          "sections": [
+            {
+              "section_index": 1,
+              "distances": [
+                10,
+                10,
+                10
+              ]
+            }
+          ]
+        },
+        {
+          "shelf_index": 2, 
+          "sections": [
+            {
+              "section_index": 1, 
+              "distances": [
+                5,
+                10,
+                5,
+                10
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
