@@ -10,14 +10,10 @@
 
 #include <digitalWriteFast.h>
 
-#include <ESP32Servo.h>
-
 const int EncA = 13;
 const int EncB = 15;
 const int In1 = 25;
 const int In2 = 26;
-
-const int ServoPin = 9; 
 
 std_msgs__msg__Int32 msg1;
 std_msgs__msg__Int32 msg2;
@@ -31,8 +27,6 @@ rclc_support_t support;
 rcl_allocator_t allocator;
 rcl_node_t node;
 rcl_timer_t timer; 
-
-Servo servo_camera; 
 
 #define RCCHECK(fn) { rcl_ret_t temp_rc = fn; if((temp_rc != RCL_RET_OK)){printf("[!] RCCHECK");}}
 #define RCSOFTCHECK(fn) { rcl_ret_t temp_rc = fn; if((temp_rc != RCL_RET_OK)){printf("[!] RSOFTCHECK");}}
@@ -65,7 +59,6 @@ void subscription_callback_scissors(const void * msgin){
 void subscription_callback_servo(const void * msgin){
   const std_msgs__msg__Int32 * msg2 = (const std_msgs__msg__Int32 *)msgin; 
   camera_servo_angle = msg2->data; 
-  servo_camera.write(camera_servo_angle); 
 }
 
 void IRAM_ATTR handleInterrupt() {
@@ -127,7 +120,6 @@ void setup(){
   RCCHECK(rclc_executor_add_timer(&executor, &timer));
 
   pub_msg.data = 0;
-  servo_camera.attach(ServoPin);
 
   analogWrite(In1, 0);
   analogWrite(In2, 120);
@@ -137,12 +129,6 @@ void setup(){
   delay(300);
   analogWrite(In1, 0);
   analogWrite(In2, 0);
-  
-  servo_camera.write(0); 
-  delay(500);
-  servo_camera.write(180);
-  delay(500);
-  servo_camera.write(0); 
 
   expected_position = 0; 
   position = 0;
