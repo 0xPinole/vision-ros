@@ -11,7 +11,7 @@ class Evaluation:
 
     def __init__(self):
         """WIP."""
-        self.model = YOLO("models/ultralytics_yolov8_model.pt")
+        self.model = YOLO("/home/roser/ros2_ws/src/srv_vision/srv_vision/models/ultralytics_yolov8_model.pt")
         # self.mean_shift = MeanShift(bandwidth=None, bin_seeding=True)
 
     def evaluate(self, frame) -> list[list[int]]:
