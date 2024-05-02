@@ -29,7 +29,9 @@ class Shelves:
 
     def _load_shelves(self):
         """Read and get the toml file of shelves."""
-        with open("srv_vision/db/shelves_trace.toml", "rb") as fg:
+        with open(
+            "~/ros2_ws/src/srv_vision/srv_vision/db/shelves_trace.toml", "rb"
+        ) as fg:
             self.shelves = json.load(fg)
 
     def _search_index(
@@ -103,12 +105,12 @@ class Products:
 
     def _load_product_list(self):
         """Load products from json database."""
-        with open("srv_vision/db/products.json", "r") as fg:
+        with open("~/ros2_ws/src/srv_vision/srv_vision/db/products.json", "r") as fg:
             self.products = json.load(fg)
 
     def _dump_product_list(self, products_json: dict[str, any]):
         """Overwrite json database."""
-        with open("srv_vision/db/products.json", "w") as fg:
+        with open("~/ros2_ws/src/srv_vision/srv_vision/db/products.json", "w") as fg:
             json.dump(products_json, fg)
 
     def get_product_by_uuid(self, query: str) -> dict[str, any]:
@@ -161,12 +163,12 @@ class Logs:
 
     def _load_logger(self):
         """Load products from json database."""
-        with open("srv_vision/db/logger.json", "r") as fg:
+        with open("~/ros2_ws/src/srv_vision/srv_vision/db/logger.json", "r") as fg:
             self.logs = json.load(fg)
 
     def _dump_logger(self, logs_json: dict[str, any]):
         """Overwrite json database."""
-        with open("srv_vision/db/logger.json", "w") as fg:
+        with open("~/ros2_ws/src/srv_vision/srv_vision/db/logger.json", "w") as fg:
             json.dump(logs_json, fg)
 
     def save_logger(self):
