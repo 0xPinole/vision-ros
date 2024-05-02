@@ -1,5 +1,7 @@
 """WIP."""
 
+import json
+
 from aws_manager import Client
 from rclpy.node import Node
 from std_msgs.msg import String
@@ -13,32 +15,38 @@ class DataManager(Node):
         """WIP."""
         super().__init__("communication_node")
         self.subscription = self.create_subscription(
-            String, "topic", self.listener_callback, 10
+            String, "aws_communication", self.listener_callback, 1
         )
+
+        self.logger_writer = self.create_publisher(String, "write_file", 10)
 
         # self.products = Products()
         # self.logs = Logs()
         self.aws_client = Client()  # Future feature expected to remove this line
 
         self.subscription  # Prevent unused variable warning.
+        self.products = Products()
 
     def listener_callback(self, msg):
         """Callback for the subscriber."""
         if msg.data == "POST":
-            with Logs() as logger:
-                captures = logger.get_captures()
-                capture_stamp = self.generate_capture_stamp(captures)
-                logger.set_capture_stamp(capture_stamp)
-                fetches = logger.get_fetches()
+            logger = Logs()
+            captures = logger.get_captures()
+            fetches = logger.get_fetches()
+            fetches_msg = String()
 
-            with Products() as products:
-                fetches = self.search_available_products(capture_stamp)
-                fetches = self.filter_valid_fetches(fetches)
-
-                for fetch in fetches:
-                    fetch["product_info"] = products.get_product_by_hash_vision(
-                        fetch["vision_hash"]
-                    )
+            for capture in captures:
+                for class_prod, stock in capture["totals"].items():
+                    position = capture["location"].split(",")
+                    if fetches.get(class_prod) is None:
+                        side = position[0]
+                        aisle = position[1] if side == "R" else position[1] + 1
+                        shelf = position[2]
+                        jpost = self.post_product(class_prod, stock, aisle, shelf)
+                        fetches_msg.data = json.dumps(
+                            {"key": class_prod, "fetch": jpost}
+                        )
+                        self.logger_writer.publish(fetches_msg)
 
     def filter_valid_fetches(self, fetches) -> list[dict[str, any]]:
         """Check if at the previous fetches of the same product, has the same data."""
@@ -66,7 +74,7 @@ class DataManager(Node):
         # self.logs.insert_fetch(vision_hash, {...})
         pass
 
-    def post_product(self, vision_hash: str, stock: str):
+    def post_product(self, vision_hash: str, stock: str, aisle: str, rack: str):
         """WIP."""
         product_info = self.products.get_product_by_hash_vision(vision_hash)
         if product_info is not None:
@@ -74,8 +82,8 @@ class DataManager(Node):
                 "PLU": product_info["plu"],
                 "Product": product_info["name"],
                 "Type": product_info["variety"],
-                "Aisle": "0",
-                "Rack": "0",
+                "Aisle": aisle,
+                "Rack": rack,
                 "AmountS": stock,
                 "AmountF": "0",
                 "Supply": False,
@@ -84,4 +92,4 @@ class DataManager(Node):
             self.aws_client.post(json_send)
 
         # True On success, else False
-        return True
+        return json_send
