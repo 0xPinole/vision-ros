@@ -1,7 +1,8 @@
 """File created to manage the AI model."""
 
 import numpy as np
-from sklearn.cluster import MeanShift
+
+# from sklearn.cluster import MeanShift
 from ultralytics import YOLO
 
 
@@ -11,7 +12,7 @@ class Evaluation:
     def __init__(self):
         """WIP."""
         self.model = YOLO("models/ultralytics_yolov8_model.pt")
-        self.mean_shift = MeanShift(bandwidth=None, bin_seeding=True)
+        # self.mean_shift = MeanShift(bandwidth=None, bin_seeding=True)
 
     def evaluate(self, frame) -> list[list[int]]:
         """WIP."""
