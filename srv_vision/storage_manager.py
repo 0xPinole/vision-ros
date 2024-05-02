@@ -6,10 +6,10 @@ import json
 # import tomllib
 from uuid import uuid4
 
-try:
-    import tomllib
-except ModuleNotFoundError:
-    import pip._vendor.tomli as tomllib
+#   try:
+#    import tomllib
+#   except ModuleNotFoundError:
+#    import pip._vendor.tomli as tomllib
 
 
 class Shelves:
@@ -30,7 +30,7 @@ class Shelves:
     def _load_shelves(self):
         """Read and get the toml file of shelves."""
         with open("db/shelves_trace.toml", "rb") as fg:
-            self.shelves = tomllib.load(fg)
+            self.shelves = json.load(fg)
 
     def _search_index(
         self, array: list[dict[str, any]], match_key: str, match_value: any
@@ -79,7 +79,8 @@ class Shelves:
 
     def search_by_aruco_id(self, aruco_id: int) -> list[list[int]]:
         """Search by the aruco_id to get the distances to go down."""
-        return [2, 1, 1]
+        positions = self.shelves["aruco_ids"][aruco_id]
+        return positions
         # Return [[aisle, shelf, section], ...], should work with left and right
         # by len(return) === 1 or 2
 
