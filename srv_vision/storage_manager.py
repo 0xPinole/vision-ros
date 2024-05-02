@@ -2,8 +2,14 @@
 
 import datetime
 import json
-import tomllib
+
+# import tomllib
 from uuid import uuid4
+
+try:
+    import tomllib
+except ModuleNotFoundError:
+    import pip._vendor.tomli as tomllib
 
 
 class Shelves:
