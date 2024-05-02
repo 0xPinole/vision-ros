@@ -4,14 +4,15 @@ import json
 from time import sleep
 
 import rclpy
-from camera_manager import Camera
 
 # from ros_vision.srv import ScissorsMechanismParams, VisionParams
 from example_interfaces.srv import AddTwoInts
-from model_manager import Evaluation
 from rclpy.node import Node
 from std_msgs.msg import String
-from storage_manager import Shelves
+
+from srv_vision.camera_manager import Camera
+from srv_vision.model_manager import Evaluation
+from srv_vision.storage_manager import Shelves
 
 
 class VisionService(Node):
