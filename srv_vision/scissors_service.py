@@ -4,7 +4,7 @@ import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Int64
 
-from ros_vision.srv import ScissorsMechanismParams
+# from ros_vision.srv import ScissorsMechanismParams
 
 
 class ScissorsMechanismSubscriber(Node):
@@ -30,9 +30,9 @@ class ScissorsMechanism(Node):
     def __init__(self):
         """Init."""
         super().__init__("scissors_mechanism")
-        self.srv = self.create_service(
-            ScissorsMechanismParams, "shift_scissors_mechanism", self.procedure
-        )
+        #      self.srv = self.create_service(
+        #         ScissorsMechanismParams, "shift_scissors_mechanism", self.procedure
+        #    )
         self.position_publisher = self.create_publisher(Int64, "scissors_movement", 1)
         self.mechanism = ScissorsMechanismSubscriber()
 

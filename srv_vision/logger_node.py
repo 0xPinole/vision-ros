@@ -4,7 +4,8 @@ import json
 
 from rclpy.node import Node
 from std_msgs.msg import String
-from storage_manager import Logs
+
+from srv_vision.storage_manager import Logs
 
 
 class LoggerFiles(Node, Logs):
