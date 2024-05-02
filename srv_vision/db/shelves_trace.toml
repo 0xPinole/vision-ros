@@ -1,99 +1,35 @@
 {
   "title": "Shelves path Tracer",
 
-  "aruco_ids": [[2,1,1], [3,2,1]], 
+  "aruco_ids": [[1,1,1], [1,1,2]], 
 
   "schemer": [
     {
-      "aisle_index": 2,
-      "clase": [
-        "enlatados",
-        "cocina"
-      ],
+      "aisle_index": 1,
       "shelves": [
         {
           "shelf_index": 1,
           "sections": [
             {
               "section_index": 1,
-              "aruco_id": 1,
               "distances": [
                 10,
                 10,
                 10
-              ]
-            },
-            {
-              "section_index": 2,
-              "aruco_id": 2,
-              "distances": [
-                40,
-                60,
-                10
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "aisle_index": 3,
-      "clase": [
-        "refrigerador"
-      ],
-      "shelves": [
-        {
-          "enable": false,
-          "shelf_index": 1,
-          "sections": [
-            {
-              "section_index": 1,
-              "distances": [
-                30,
-                30,
-                30
-              ]
-            },
-            {
-              "section_index": 2,
-              "distances": [
-                15,
-                20,
-                20
               ]
             }
           ]
         },
         {
-          "shelf_index": 2,
+          "shelf_index": 2, 
           "sections": [
             {
-              "section_index": 1,
-              "aruco_id": 1,
+              "section_index": 1, 
               "distances": [
+                5,
                 10,
-                50,
-                10,
-                10,
+                5,
                 10
-              ]
-            },
-            {
-              "section_index": 2,
-              "aruco_id": 2,
-              "distances": [
-                15,
-                15,
-                15
-              ]
-            },
-            {
-              "section_index": 3,
-              "enable": false,
-              "distances": [
-                10,
-                20,
-                20
               ]
             }
           ]
