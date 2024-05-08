@@ -25,14 +25,15 @@ float conversion = 0;
 float pos = 0;
 float prev_pos = 0;
 float prev_pos = 0;
+float linear_vel = 0;
 float current_pos = 0;
 
 void reset()
 {
 
-    contador = 0;
-    revoluciones = 0;
-    velocidad = 0;
+    current_pulse = 0;
+    revolutions = 0;
+    linear_vel = 0;
 }
 
 void stop()
@@ -102,6 +103,20 @@ void IRAM_ATTR Encoder()
     }
 }
 
+void IRAM_ATTR getVel()
+{
+
+    // Set velocity
+  linear_vel = (current_pos - prev_pos) / 0.01);
+
+  // Always set positve velocity
+  if (linear_vel < 0)
+      linear_vel = abs(linear_vel)
+
+          // Update previous position
+          prev_pos = current_pos;
+}
+
 void setup()
 {
 
@@ -113,40 +128,23 @@ void setup()
     pinMode(EncA, INPUT_PULLUP);
     pinMode(EncB, INPUT_PULLUP);
 
+    // Interruptions for Encoder signals
     attachInterrupt(digitalPinToInterrupt(EncA), Encoder, CHANGE);
     attachInterrupt(digitalPinToInterrupt(EncB), Encoder, CHANGE);
+
+    // Interruption to get velocity and position
+    timer = timerBegin(0, 80, true);            // Timer 0, clock divider 80
+    timerAttachInterrupt(timer, &getVel, true); // Attach the interrupt handling function
+    timerAlarmWrite(timer, 10000, true);        // Interrupt every 10,000 ms
+    timerAlarmEnable(timer);                    // Enable the alarm
 }
 
 void loop()
 {
 
-    if (milis() - lastTime >= sampleTime || lastTime == 0)
-    {
-
-        // Update lastime
-        lastTime = millis();
-
-        // Set position in degrees
-        motor_pos = (n * 360.0) / enc;
-
-        Serial.print("Posicion en grados: ");
-        Serial.println(P);
-    }
-
     if (Serial.available() > 0)
     {
 
         int target = Serial.read();
-
-        if (target > 0)
-        {
-
-            turn_rigth();
-        }
-        else
-        {
-
-            turn_left();
-        }
     }
 }
