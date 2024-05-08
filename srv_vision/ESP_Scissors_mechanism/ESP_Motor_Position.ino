@@ -11,11 +11,11 @@ volatile bool Aset = 0;
 volatile bool Bset = 0;
 
 // Motor var
-int ppr = 4560;       // Pulses per revolution
-float enc_res = 0.12; // Resolucion del encoder
-volatile int n = 0;   // Current number of pulses
-int motor_pos = 0;    // Motor position in degree's
-int pwm = 30;         // (30 - 250) min and max values to move the motor
+int ppr = 4560;        // Pulses per revolution
+float enc_res = 0.126; // Resolucion del encoder
+volatile int n = 0;    // Current number of pulses
+int motor_pos = 0;     // Motor position in degree's
+int pwm = 30;          // (30 - 250) min and max values to move the motor
 
 // Others
 long current_pulse = 0 : long current_pulse_aux = 0;
@@ -117,6 +117,44 @@ void IRAM_ATTR getVel()
           prev_pos = current_pos;
 }
 
+void reachTarget(char direction, int distance)
+{
+
+    // Estimate pulses needed to reach the distance
+    int initial_pulse = current_pulse_aux;
+    int pulses_needed = distance / enc_res;
+
+    // Set motor direction
+    if (direction == 'L')
+    {
+
+        turn_left(pwm);
+    }
+    else if (direction == 'R')
+    {
+
+        turn_rigth(pwm);
+    }
+
+    while (abs(current_pulse_aux) < abs(pulses_needed))
+    {
+
+        Serial.print("Direction: ");
+        Serila.println(direction);
+
+        Serial.print("Velocity: ");
+        Serila.println(linear_vel);
+
+        float distance_covered = abs(current_pulse_aux - initial_pulse) * enc_res;
+        Serial.print("Covered distance: ");
+        Serial.print(distance_covered);
+        Serial.println(" cm");
+    }
+
+    stop();
+}
+}
+
 void setup()
 {
 
@@ -145,6 +183,9 @@ void loop()
     if (Serial.available() > 0)
     {
 
-        int target = Serial.read();
+        char direction = Serial.read();
+        int distance = Serial.read();
+
+        reachTarget(direction, distance);
     }
 }
