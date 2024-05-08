@@ -20,8 +20,6 @@ setup(
     license="TODO: License declaration",
     tests_require=["pytest"],
     entry_points={
-        "console_scripts": [
-            "vision = srv_vision.vision_service:main"
-            ],
+        "console_scripts": ["vision = srv_vision.vision_service:main"],
     },
 )

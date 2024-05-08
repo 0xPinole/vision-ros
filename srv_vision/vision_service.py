@@ -4,14 +4,11 @@ import json
 import time
 
 import rclpy
-from rclpy.node import Node
 
 # from ros_vision.srv import VisionParams
 from example_interfaces.srv import AddTwoInts
-
-from std_msgs.msg import Int8MultiArray
-from std_msgs.msg import Int32
-from std_msgs.msg import Bool
+from rclpy.node import Node
+from std_msgs.msg import Bool, Int8MultiArray, Int32
 
 from srv_vision.storage_manager import Shelves
 
@@ -24,15 +21,11 @@ class VisionService(Node):
         super().__init__("vision_service_node")
         self.vision_service = self.create_service(
             AddTwoInts, "vision_service", self.__service_callback
-        ) # Replace with aligned interface
+        )  # Replace with aligned interface
 
-        self.__shift_scissors_pub = self.create_publisher(
-            Int32, "shift_scissors", 1
-        )
+        self.__shift_scissors_pub = self.create_publisher(Int32, "shift_scissors", 1)
 
-        self.__rotate_camera_pub = self.create_publisher(
-            Int32, "rotate_camera", 1
-        )
+        self.__rotate_camera_pub = self.create_publisher(Int32, "rotate_camera", 1)
 
         self.__model_evaluation_pub = self.create_publisher(
             Int8MultiArray, "model_evaluation", 10
@@ -48,6 +41,7 @@ class VisionService(Node):
         self.servo_side = True
 
     def srv_publish_topic(self, topic_name: str, topic_value: any):
+        """Simplification of publisher for casting and waiting default methods."""
         if topic_name == "shift_scissors":
             self.__rotate_camera_msgs.data = topic_value
             self.__shift_scissors_pub.publish(self.__rotate_camera_msgs)
@@ -62,26 +56,35 @@ class VisionService(Node):
             self.__model_evaluation_msgs.data = topic_value
             self.__model_evaluation_pub.publish(self.__model_evaluation_msgs)
 
-
     def __service_callback(self, request, response):
         """Main loop to run all needed procesess."""
-        self.__aruco_id = request.a # request.ArUco_id
+        self.__aruco_id = request.a  # request.ArUco_id
         # aruco_id = request.Aruco_id
         self.__shelves_map = self.__shelves.search_by_aruco_id(aruco_id)
-        setpoints = self.__shelves_map["left"]["setpoints"] + self.__shelves_map["right"]["setpoints"]
+        setpoints = (
+            self.__shelves_map["left"]["setpoints"]
+            + self.__shelves_map["right"]["setpoints"]
+        )
 
-        location = {"aisle": -1, "shelf": -1, "aruco_id": self.__aruco_id, "setpoint_index": -1}
+        location = {
+            "aisle": -1,
+            "shelf": -1,
+            "aruco_id": self.__aruco_id,
+            "setpoint_index": -1,
+        }
 
         for i, _setpoint in enumerate(sorted(list(dict.fromkeys(setpoints)))):
             location["setpoint_index"] = _i
             self.srv_publish_topic("shift_scissors", _setpoint)
-            for side_key in (["right", "left"] if self.servo_side else ["left", "right"]):
+            for side_key in ["right", "left"] if self.servo_side else ["left", "right"]:
                 if _setpoint not in self.__shelves_map[side_key]["setpoints"]:
                     continue
-                location.update({
-                    "aisle": self.__shelves_map[side_key]["aisle"],
-                    "shelf": self.__shelves_map[side_key]["shelf"],
-                })
+                location.update(
+                    {
+                        "aisle": self.__shelves_map[side_key]["aisle"],
+                        "shelf": self.__shelves_map[side_key]["shelf"],
+                    }
+                )
 
                 self.srv_publish_topic("rotate_camera", side_key)
                 self.srv_publish_topic("model_evaluation", location.values())
@@ -92,6 +95,7 @@ class VisionService(Node):
         response.sum = 1
         return response
 
+
 def main():
     """Init ros2 and node of vision service."""
     rclpy.init()
@@ -100,6 +104,7 @@ def main():
     rclpy.spin(service)
     service.destroy_node()
     rclpy.shutdown()
+
 
 if __name__ == "__main__":
     """Run main fun."""
