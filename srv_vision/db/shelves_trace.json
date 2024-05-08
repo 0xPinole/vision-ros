@@ -2,7 +2,7 @@
   "title": "Shelves path Tracer",
 
   "aruco_id": {
-    1: {
+    "1": {
       "left": {
         "aisle": 1,
         "shelf": 1,
@@ -14,7 +14,7 @@
         "setpoints": [30, 45]
       }
     },
-    2: {
+    "2": {
       "left": {
         "aisle": 1,
         "shelf": 1,
@@ -26,12 +26,12 @@
         "setpoints": [30, 45]
       }
     },
-    3: {
+    "3": {
       "left": {
         "aisle": -1,
         "shelf": -1,
         "setpoints": []
-      }
+      },
       "right": {
         "aisle": 1,
         "shelf": 5,

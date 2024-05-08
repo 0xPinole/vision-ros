@@ -8,7 +8,7 @@ from std_msgs.msg import String
 from srv_vision.storage_manager import Logs
 
 
-class LoggerFiles(Node, Logs):
+class LoggerFiles(Node):
     """WIP."""
 
     def __init__(self):

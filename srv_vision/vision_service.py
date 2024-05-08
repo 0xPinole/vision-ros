@@ -35,7 +35,7 @@ class VisionService(Node):
 
         self.__shift_scissors_msgs = Int32()
         self.__rotate_camera_msgs = Int32()
-        self.__model_evaluation_msgs = String()
+        self.__model_evaluation_msgs = Int8MultiArray()
 
         self.__aruco_id = -1
         self.servo_side = True
@@ -53,14 +53,14 @@ class VisionService(Node):
             self.__rotate_camera_pub.publish(self.__rotate_camera_msgs)
             time.sleep(3)
         if topic_name == "model_evaluation":
-            self.__model_evaluation_msgs.data = topic_value
+            self.__model_evaluation_msgs.data = list(topic_value.values())
             self.__model_evaluation_pub.publish(self.__model_evaluation_msgs)
 
     def __service_callback(self, request, response):
         """Main loop to run all needed procesess."""
         self.__aruco_id = request.a  # request.ArUco_id
         # aruco_id = request.Aruco_id
-        self.__shelves_map = self.__shelves.search_by_aruco_id(aruco_id)
+        self.__shelves_map = self.__shelves.search_by_aruco_id(self.__aruco_id)
         setpoints = (
             self.__shelves_map["left"]["setpoints"]
             + self.__shelves_map["right"]["setpoints"]
@@ -74,7 +74,7 @@ class VisionService(Node):
         }
 
         for i, _setpoint in enumerate(sorted(list(dict.fromkeys(setpoints)))):
-            location["setpoint_index"] = _i
+            location["setpoint_index"] = i
             self.srv_publish_topic("shift_scissors", _setpoint)
             for side_key in ["right", "left"] if self.servo_side else ["left", "right"]:
                 if _setpoint not in self.__shelves_map[side_key]["setpoints"]:
@@ -86,8 +86,10 @@ class VisionService(Node):
                     }
                 )
 
+                print(location)
+
                 self.srv_publish_topic("rotate_camera", side_key)
-                self.srv_publish_topic("model_evaluation", location.values())
+                self.srv_publish_topic("model_evaluation", location)
 
         self.srv_publish_topic("shift_scissors", 0)
         self.srv_publish_topic("rotate_camera", 0)
