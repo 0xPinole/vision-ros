@@ -5,7 +5,7 @@ import time
 
 import rclpy
 
-from ros_vision.srv import VisionParams
+from vision_interfaces.srv import VisionParams
 from rclpy.node import Node
 from std_msgs.msg import Bool, Int8MultiArray, Int32
 
