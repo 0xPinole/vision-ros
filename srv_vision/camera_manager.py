@@ -10,7 +10,7 @@ class Camera(CamConfig):
 
     def __init__(self):
         """Get camera running."""
-        pass
+        self.__load_camera()
 
     def __load_camera(self):
         """Load camera."""
@@ -24,7 +24,8 @@ class Camera(CamConfig):
             self.camera = None
 
         if self.camera is not None:
-            self.flags_setter()
+            # self.flags_setter()
+            pass
 
     def __enter__(self):
         """Logic created for ContextManager."""

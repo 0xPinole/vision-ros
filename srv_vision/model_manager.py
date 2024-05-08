@@ -4,12 +4,16 @@ import numpy as np
 
 import rclpy
 from rclpy.node import Node
+import json
+
+import time
 
 from ultralytics import YOLO
 from sklearn.cluster import MeanShift
 from srv_vision.camera_manager import Camera
 
-from std_msgs import Int8MultiArray, Empty
+from std_msgs.msg import Int8MultiArray, Empty
+from vision_interfaces.srv import DataParams
 
 
 class Evaluation(Node):
@@ -25,35 +29,66 @@ class Evaluation(Node):
             Int8MultiArray, "model_evaluate", self.__listener_callback, 1
         )
 
-        self.__server_post_pub = self.create_publisher(
-            Empty, "server_post", 1
-        )
-
-        self.__data_saver_pub = self.create_publisher(
-            String, "data_saver", 10
-        )
+        self.__server_post_pub = self.create_publisher(Empty, "server_post", 1)
+        self.__data_saver_client = self.create_client(DataParams, 'data_saver')
+        while not self.__data_saver_client.wait_for_service(timeout_sec=1.0):
+            pass
 
         self.__subscription
         self.__empty_msg = Empty()
-        self.__data_saver_msgs = String()
 
         self.mean_shift = MeanShift(bandwidth=None, bin_seeding=True)
 
-    def __listener_callback(self, msg):
-        self.location = msg.data
-        with Camera() as cap:
-            frame = cap.get_frame()
+        self.__data_saver_request = DataParams.Request()
+        self.camera = Camera()
+        self.waiting = True
+        self.result = 200
 
-        frame_evaluation = self.evaluate(self.frame)
+    async def data_saver_service_request(self, data_json: str):
+        self.__data_saver_request.saver_json = data_json
+        print("callback created")
+        self.future = self.__data_saver_client.call_async(self.__data_saver_request)
+        print("future declare")
+        self.waiting = True
+        self.result = await self.future
+        self.waiting = False
+        #rclpy.spin_until_future_complete(self, self.future)
+        print(self.result)
+        print("spin end")
+        return self.result
 
+    async def __listener_callback(self, msg):
+        print("init listener")
+        location = msg.data
+        location = location.tolist()
 
+        frame = self.camera.get_frame()
+
+        frame_evaluation = self.evaluate(frame)
+
+        data_saver_req = {
+            "type_request": "capture",
+            "location": location,
+            "totals": frame_evaluation
+        }
+
+        data_saver_req = json.dumps(data_saver_req)
+
+        self.__data_saver_request.saver_json = data_saver_req
+
+        self.__data_saver_client.call_async(self.__data_saver_request)
+
+        time.sleep(2)
+        self.__server_post_pub.publish(self.__empty_msg)
 
     def evaluate(self, frame) -> list[list[int]]:
         """WIP."""
         result = self.model.predict(frame)
         result = result[0]
-        reduce = self.simplify(result.boxes.xywh.numpy(), result.boxes.cls.numpy())
-        print(reduce)
+        bxs = result.boxes.cpu()
+        coords_bx = bxs.xywh.numpy()
+        classes_bx = bxs.cls.numpy()
+        reduce = self.simplify(coords_bx, classes_bx)
         return reduce
 
     def simplify(
@@ -82,6 +117,22 @@ class Evaluation(Node):
         reduced_array = {}
 
         for label in labels_unique:
-            reduced_array[label] = len(cls_prods[cls_prods == label])
+            label_val = label.item()
+            reduced_array[label_val] = len(cls_prods[cls_prods == label])
 
         return reduced_array
+
+
+def main():
+    """Init ros2 and node of vision service."""
+    rclpy.init()
+    node = Evaluation()
+
+    rclpy.spin(node)
+    service.destroy_node()
+    rclpy.shutdown()
+
+
+if __name__ == "__main__":
+    """Run main fun."""
+    main()
