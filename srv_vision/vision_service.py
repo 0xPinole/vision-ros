@@ -45,13 +45,13 @@ class VisionService(Node):
             self.__rotate_camera_msgs.data = topic_value
             self.__shift_scissors_pub.publish(self.__rotate_camera_msgs)
             time.sleep(5)
-        if topic_name == "rotate_camera":
+        elif topic_name == "rotate_camera":
             topic_value = 0 if topic_value == "right" else 180
             self.__rotate_camera_msgs.data = topic_value
             self.servo_side = topic_value == 0
             self.__rotate_camera_pub.publish(self.__rotate_camera_msgs)
             time.sleep(3)
-        if topic_name == "model_evaluate":
+        elif topic_name == "model_evaluate":
             self.__model_evaluation_msgs.data = list(topic_value.values())
             self.__model_evaluation_pub.publish(self.__model_evaluation_msgs)
 

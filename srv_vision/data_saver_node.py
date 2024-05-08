@@ -15,24 +15,28 @@ class DataSaver(Node):
 
     def __init__(self):
         """WIP."""
-        super().__init__("data_saver_node")
-        self.subscription = self.create_subscription(
-            String, "write_file", self.listener_callback, 10
+        super().__init__("data_saver_service_node")
+        self.data_service = self.create_service(
+            DataParams, "data_saver", self.__service_callback
         )
 
-        self.subscription
-        self.logger = Logs()
+    def __service_callback(self, request, response):
+        """Callback of service for each request."""
 
-    def listener_callback(self, msg):
-        """WIP."""
-        type_request, callback_request = msg.data.split(":", 1)
-        data = json.loads(callback_request)
+        data = request.saver_json
+        data = json.loads(data)
 
-        if type_request == "capture":
-            self.logger.insert_log(data["location"], data["totals"])
-        elif type_request == "fetch":
-            self.logger.insert_fetch(data["key"], data["fetch"])
+        if data["type_request"] == "capture":
+            logger = Logs()
+            logger.insert_log(data["location"], data["totals"])
+            logger.save_logger()
+            response.status_code = 200
+        elif data["type_request"] == "capture":
+            logger = Logs()
+            logger.insert_fetch(data["key"], data["fetch"])
+            logger.save_logger()
+            response.status_code = 200
+        else:
+            response.status_code = 400
 
-        self.logger.save_logger()
-
-        self.logger = Logs()
+        return response
