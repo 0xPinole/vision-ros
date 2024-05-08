@@ -6,34 +6,31 @@ const int EncB = 13;
 const int In1 = 25;
 const int In2 = 26;
 
-// Interruptions var
+// Interruptions variables
 volatile bool Aset = 0;
 volatile bool Bset = 0;
 
-// Motor var
-int ppr = 4560;        // Pulses per revolution
-float enc_res = 0.126; // Resolucion del encoder
-volatile int n = 0;    // Current number of pulses
-int motor_pos = 0;     // Motor position in degree's
-int pwm = 30;          // (30 - 250) min and max values to move the motor
+// Motor variables
+int ppr = 4560;       // Pulses per revolution
+float enc_res = 0.12; // Encoder resolution
+int motor_pos = 0;    // Motor position in degrees
+int pwm = 30;         // PWM value (30 - 250) for motor movement
 
 // Others
-long current_pulse = 0 : long current_pulse_aux = 0;
-long revolutions = 0;
-float conversion = 0;
+hw_timer_t *timer = NULL;
 
-float pos = 0;
+long current_pulse = 0;
+long revolutions = 0;
 float prev_pos = 0;
-float prev_pos = 0;
-float linear_vel = 0;
 float current_pos = 0;
+float linear_vel = 0.0;
 
 void reset()
 {
 
     current_pulse = 0;
     revolutions = 0;
-    linear_vel = 0;
+    linear_vel = 0.0;
 }
 
 void stop()
@@ -43,88 +40,66 @@ void stop()
     analogWrite(In2, 0);
 }
 
-void turn_rigth(int pwm)
-{
-
-    analogWrite(In1, 0);
-    analogWrite(In2, pwm);
-}
-
-void turn_left(int pwm)
+void turn_right(int pwm)
 {
 
     analogWrite(In1, pwm);
     analogWrite(In2, 0);
 }
 
-// Get motor direction
+void turn_left(int pwm)
+{
+
+    analogWrite(In1, 0);
+    analogWrite(In2, pwm);
+}
+
+// Encoder interruption routine
 void IRAM_ATTR Encoder()
 {
 
     Aset = digitalRead(EncA);
     Bset = digitalRead(EncB);
 
-    // Left
-    if (BSet == ASet)
+    if (Bset == Aset)
     {
 
         current_pulse++;
-        current_pulse_aux++;
-
-        // Transform pulse to degrees
-        pos = current_pulse * enc_res;
-        current_pos = current_pulse_aux * enc_res;
-
-        // Reset pulses per revolution
-        if (current_pulse >= ppr)
-        {
-            revolutions++;
-            current_pulse = 0;
-        }
     }
-
-    // Rigth
     else
     {
 
         current_pulse--;
-        current_pulse_aux--;
+    }
 
-        // Transform pulse to degrees
-        pos = current_pulse * enc_res;
-        current_pos = current_pulse_aux * enc_res;
+    motor_pos = (current_pulse * 360) / ppr;
+    current_pos = motor_pos;
 
-        // Reset pulses per revolution
-        if (contador <= -pulsos)
-        {
-            revolutions--;
-            current_pulse = 0;
-        }
+    if (current_pulse >= ppr || current_pulse <= -ppr)
+    {
+        revolutions++;
+        current_pulse = 0;
     }
 }
 
+// Velocity calculation interruption routine
 void IRAM_ATTR getVel()
 {
 
-    // Set velocity
-  linear_vel = (current_pos - prev_pos) / 0.01);
+    linear_vel = (current_pos - prev_pos) / 0.015;
 
-  // Always set positve velocity
-  if (linear_vel < 0)
-      linear_vel = abs(linear_vel)
+    if (linear_vel < 0)
+        linear_vel = -linear_vel;
 
-          // Update previous position
-          prev_pos = current_pos;
+    prev_pos = current_pos;
 }
 
 void reachTarget(char direction, int distance)
 {
 
-    // Estimate pulses needed to reach the distance
-    int initial_pulse = current_pulse_aux;
+    int initial_pulse = current_pulse;
     int pulses_needed = distance / enc_res;
 
-    // Set motor direction
     if (direction == 'L')
     {
 
@@ -133,26 +108,26 @@ void reachTarget(char direction, int distance)
     else if (direction == 'R')
     {
 
-        turn_rigth(pwm);
+        turn_right(pwm);
     }
 
-    while (abs(current_pulse_aux) < abs(pulses_needed))
+    while (abs(current_pulse - initial_pulse) < abs(pulses_needed))
     {
 
-        Serial.print("Direction: ");
-        Serila.println(direction);
-
         Serial.print("Velocity: ");
-        Serila.println(linear_vel);
+        Serial.println(linear_vel);
 
-        float distance_covered = abs(current_pulse_aux - initial_pulse) * enc_res;
+        Serial.print("Direction: ");
+        Serial.println(direction);
+
+        float distance_covered = abs(current_pulse - initial_pulse) * enc_res;
         Serial.print("Covered distance: ");
         Serial.print(distance_covered);
         Serial.println(" cm");
     }
 
     stop();
-}
+    reset();
 }
 
 void setup()
@@ -166,15 +141,13 @@ void setup()
     pinMode(EncA, INPUT_PULLUP);
     pinMode(EncB, INPUT_PULLUP);
 
-    // Interruptions for Encoder signals
     attachInterrupt(digitalPinToInterrupt(EncA), Encoder, CHANGE);
     attachInterrupt(digitalPinToInterrupt(EncB), Encoder, CHANGE);
 
-    // Interruption to get velocity and position
-    timer = timerBegin(0, 80, true);            // Timer 0, clock divider 80
-    timerAttachInterrupt(timer, &getVel, true); // Attach the interrupt handling function
-    timerAlarmWrite(timer, 10000, true);        // Interrupt every 10,000 ms
-    timerAlarmEnable(timer);                    // Enable the alarm
+    timer = timerBegin(0, 80, true); // Timer 0, prescaler 80
+    timerAttachInterrupt(timer, &getVel, true);
+    timerAlarmWrite(timer, 15000, true); // 0.015 s interval
+    timerAlarmEnable(timer);
 }
 
 void loop()
@@ -183,8 +156,12 @@ void loop()
     if (Serial.available() > 0)
     {
 
-        char direction = Serial.read();
-        int distance = Serial.read();
+        String str = Serial.readStringUntil(' ');
+
+        char direction = str.charAt(0);
+
+        str.remove(0, 1);
+        int distance = str.toInt();
 
         reachTarget(direction, distance);
     }
