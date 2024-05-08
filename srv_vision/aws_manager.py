@@ -34,7 +34,7 @@ class Client(Credentials_aws):
         """WIP."""
         try:
             response = requests.post(
-                base64.b64decode(self._endpoint_s1 + self._endpoint_s2).decode("utf-8"),
+                base64.b64decode(self.endpoint_s1 + self.endpoint_s2).decode("utf-8"),
                 json=sender,
                 headers=self.headers,
             )
