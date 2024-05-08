@@ -2,25 +2,58 @@
 
 import numpy as np
 
-# from sklearn.cluster import MeanShift
+import rclpy
+from rclpy.node import Node
+
 from ultralytics import YOLO
+from sklearn.cluster import MeanShift
+from srv_vision.camera_manager import Camera
+
+from std_msgs import Int8MultiArray, Empty
 
 
-class Evaluation:
+class Evaluation(Node):
     """WIP."""
 
     def __init__(self):
         """WIP."""
+        super().__init__("model_evaluation_node")
         self.model = YOLO(
-            "/home/roser/ros2_ws/src/srv_vision/srv_vision/models/ultralytics_yolov8_model.pt"
+            "/home/pinole/ros2_ws/src/srv_vision/srv_vision/models/ultralytics_yolov8_model.pt"
         )
-        # self.mean_shift = MeanShift(bandwidth=None, bin_seeding=True)
+        self.__subscription = self.create_subscription(
+            Int8MultiArray, "model_evaluate", self.__listener_callback, 1
+        )
+
+        self.__server_post_pub = self.create_publisher(
+            Empty, "server_post", 1
+        )
+
+        self.__data_saver_pub = self.create_publisher(
+            String, "data_saver", 10
+        )
+
+        self.__subscription
+        self.__empty_msg = Empty()
+        self.__data_saver_msgs = String()
+
+        self.mean_shift = MeanShift(bandwidth=None, bin_seeding=True)
+
+    def __listener_callback(self, msg):
+        self.location = msg.data
+        with Camera() as cap:
+            frame = cap.get_frame()
+
+        frame_evaluation = self.evaluate(self.frame)
+
+
 
     def evaluate(self, frame) -> list[list[int]]:
         """WIP."""
         result = self.model.predict(frame)
         result = result[0]
         reduce = self.simplify(result.boxes.xywh.numpy(), result.boxes.cls.numpy())
+        print(reduce)
         return reduce
 
     def simplify(

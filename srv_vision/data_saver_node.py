@@ -8,12 +8,12 @@ from std_msgs.msg import String
 from srv_vision.storage_manager import Logs
 
 
-class LoggerFiles(Node):
+class DataSaver(Node):
     """WIP."""
 
     def __init__(self):
         """WIP."""
-        super().__init__("logs_manager_node")
+        super().__init__("data_saver_node")
         self.subscription = self.create_subscription(
             String, "write_file", self.listener_callback, 10
         )

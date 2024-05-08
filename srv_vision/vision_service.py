@@ -5,8 +5,7 @@ import time
 
 import rclpy
 
-# from ros_vision.srv import VisionParams
-from example_interfaces.srv import AddTwoInts
+from ros_vision.srv import VisionParams
 from rclpy.node import Node
 from std_msgs.msg import Bool, Int8MultiArray, Int32
 
@@ -20,7 +19,7 @@ class VisionService(Node):
         """Init vision main service."""
         super().__init__("vision_service_node")
         self.vision_service = self.create_service(
-            AddTwoInts, "vision_service", self.__service_callback
+            VisionParams, "vision_service", self.__service_callback
         )  # Replace with aligned interface
 
         self.__shift_scissors_pub = self.create_publisher(Int32, "shift_scissors", 1)
@@ -28,7 +27,7 @@ class VisionService(Node):
         self.__rotate_camera_pub = self.create_publisher(Int32, "rotate_camera", 1)
 
         self.__model_evaluation_pub = self.create_publisher(
-            Int8MultiArray, "model_evaluation", 10
+            Int8MultiArray, "model_evaluate", 10
         )
 
         self.__shelves = Shelves()
@@ -52,14 +51,13 @@ class VisionService(Node):
             self.servo_side = topic_value == 0
             self.__rotate_camera_pub.publish(self.__rotate_camera_msgs)
             time.sleep(3)
-        if topic_name == "model_evaluation":
+        if topic_name == "model_evaluate":
             self.__model_evaluation_msgs.data = list(topic_value.values())
             self.__model_evaluation_pub.publish(self.__model_evaluation_msgs)
 
     def __service_callback(self, request, response):
         """Main loop to run all needed procesess."""
-        self.__aruco_id = request.a  # request.ArUco_id
-        # aruco_id = request.Aruco_id
+        self.__aruco_id = request.Aruco_id
         self.__shelves_map = self.__shelves.search_by_aruco_id(self.__aruco_id)
         setpoints = (
             self.__shelves_map["left"]["setpoints"]
@@ -86,17 +84,14 @@ class VisionService(Node):
                     }
                 )
 
-                print(location)
-
                 self.srv_publish_topic("rotate_camera", side_key)
-                self.srv_publish_topic("model_evaluation", location)
+                self.srv_publish_topic("model_evaluate", location)
 
         self.srv_publish_topic("shift_scissors", 0)
         self.srv_publish_topic("rotate_camera", 0)
 
-        response.sum = 1
+        response.status_code = 1
         return response
-
 
 def main():
     """Init ros2 and node of vision service."""
