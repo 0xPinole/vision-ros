@@ -27,6 +27,14 @@ float prev_pos = 0;
 float prev_pos = 0;
 float current_pos = 0;
 
+void reset()
+{
+
+    contador = 0;
+    revoluciones = 0;
+    velocidad = 0;
+}
+
 void stop()
 {
 
@@ -88,9 +96,8 @@ void IRAM_ATTR Encoder()
         // Reset pulses per revolution
         if (contador <= -pulsos)
         {
-
-            revoluciones--;
-            contador = 0;
+            revolutions--;
+            current_pulse = 0;
         }
     }
 }
