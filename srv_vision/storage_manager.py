@@ -161,14 +161,14 @@ class Logs:
     def _load_logger(self):
         """Load products from json database."""
         with open(
-            "/home/roser/ros2_ws/src/srv_vision/srv_vision/db/logger.json", "r"
+            "/home/pinole/ros2_ws/src/srv_vision/srv_vision/db/logger.json", "r"
         ) as fg:
             self.logs = json.load(fg)
 
     def _dump_logger(self, logs_json: dict[str, any]):
         """Overwrite json database."""
         with open(
-            "/home/roser/ros2_ws/src/srv_vision/srv_vision/db/logger.json", "w"
+            "/home/pinole/ros2_ws/src/srv_vision/srv_vision/db/logger.json", "w"
         ) as fg:
             json.dump(logs_json, fg)
 

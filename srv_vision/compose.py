@@ -3,20 +3,22 @@
 import rclpy
 from rclpy.executors import SingleThreadedExecutor
 
-from srv_vision.communication_node import DataManager
-from srv_vision.vision_service import VisionService
+#from srv_vision.communication_node import DataManager
+#from srv_vision.vision_service import VisionService
+from srv_vision.data_saver_node import DataSaver
+from srv_vision.model_manager import Evaluation
 
 
 def main(args=None):
     """Main run for all nodes & services."""
     rclpy.init(args=args)
     try:
-        data_manager = DataManager()
-        vision_service = VisionService()
+        data_service = DataSaver()
+        evaluation_node = Evaluation()
 
         executor = SingleThreadedExecutor()
-        executor.add_node(vision_service)
-        executor.add_node(data_manager)
+        executor.add_node(data_service)
+        executor.add_node(evaluation_node)
 
         try:
             executor.spin()

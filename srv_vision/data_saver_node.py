@@ -2,6 +2,7 @@
 
 import json
 
+import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
 
@@ -24,6 +25,10 @@ class DataSaver(Node):
         """Callback of service for each request."""
 
         data = request.saver_json
+        if data == "test":
+            response.status_code = 500
+            return response
+
         data = json.loads(data)
 
         if data["type_request"] == "capture":
@@ -31,12 +36,26 @@ class DataSaver(Node):
             logger.insert_log(data["location"], data["totals"])
             logger.save_logger()
             response.status_code = 200
-        elif data["type_request"] == "capture":
+        elif data["type_request"] == "fetches":
             logger = Logs()
             logger.insert_fetch(data["key"], data["fetch"])
             logger.save_logger()
             response.status_code = 200
         else:
             response.status_code = 400
-
+        print(response.status_code)
         return response
+
+def main():
+    """Init ros2 and node of vision service."""
+    rclpy.init()
+    node = DataSaver()
+
+    rclpy.spin(node)
+    service.destroy_node()
+    rclpy.shutdown()
+
+
+if __name__ == "__main__":
+    """Run main fun."""
+    main()

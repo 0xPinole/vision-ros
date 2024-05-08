@@ -22,7 +22,9 @@ setup(
     entry_points={
         'console_scripts': [
             'vision = srv_vision.vision_service:main',
-            'communication = srv_vision.communication_node:main'
+            'composed = srv_vision.compose:main',
+            'data_saver = srv_vision.data_saver_node:main',
+            'model = srv_vision.model_manager:main'
         ],
     },
 )
