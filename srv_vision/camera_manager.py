@@ -15,7 +15,7 @@ class Camera(CamConfig):
     def __load_camera(self):
         """Load camera."""
         try:
-            self.camera = cv2.VideoCapture(0)
+            self.camera = cv2.VideoCapture(2)
             if not self.camera.isOpened():
                 raise ValueError("Error: Camera not detected")
         except Exception:

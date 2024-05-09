@@ -57,7 +57,7 @@ class VisionService(Node):
 
     def __service_callback(self, request, response):
         """Main loop to run all needed procesess."""
-        self.__aruco_id = request.Aruco_id
+        self.__aruco_id = request.aruco_id
         self.__shelves_map = self.__shelves.search_by_aruco_id(self.__aruco_id)
         setpoints = (
             self.__shelves_map["left"]["setpoints"]
