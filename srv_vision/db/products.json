@@ -1,1 +1,97 @@
-{"products": {"ba50049a-38d5-41ee-b0b6-64d93efa81f2": {"plu": "49000024685", "name": "Coca-Cola", "brand": "Coca-Cola", "content": "500 ml", "type": "Carbonated beverage", "category": "Drinks", "variety": "Original", "description": "Coca-Cola is a refreshing and delicious carbonated beverage made with high-quality ingredients. It is the most popular carbonated beverage in the world and is enjoyed in over 200 countries. Coca-Cola is available in a variety of flavors, including original, sugar-free, Zero Sugar, and Cherry."}, "820d42bb-27d7-468d-b420-13597cd5ea47": {"plu": "49000024708", "name": "Sprite", "brand": "Sprite", "content": "16.9 fl oz", "type": "Carbonated beverage", "category": "Drinks", "variety": "Original", "description": "Sprite is a lemon-lime flavored soda pop known for its crisp, clean taste. Introduced in 1961 by The Coca-Cola Company, it quickly became a major competitor to 7 Up. Today, Sprite is one of the most popular soda pops globally, available in over 160 countries. Its refreshing citrus flavor makes it a perfect choice for quenching thirst on a hot day."}, "2b79da9f-7279-487d-85e1-8df800450dfd": {"plu": "49000014235", "name": "Orange Fanta", "brand": "Fanta", "content": "Not specified", "type": "Carbonated beverage", "category": "Drinks", "variety": "Orange", "description": "A citrus-flavored soda pop, Fanta Orange is a refreshing drink enjoyed by people of all ages.  Fanta originated in Germany in 1940 when Coca-Cola could not import its syrups due to World War II. The company created Fanta using readily available ingredients, and it proved so popular that Coca-Cola decided to keep the brand after the war."}}, "vision_hash": {"obj1": "2b79da9f-7279-487d-85e1-8df800450dfd"}}
+{
+  "products":
+  {
+    "ba50049a-38d5-41ee-b0b6-64d93efa81f2":
+    {
+      "plu": "49000024685",
+      "name": "Coca-Cola",
+      "brand": "Coca-Cola",
+      "content": "500 ml",
+      "type": "Carbonated beverage",
+      "category": "Drinks",
+      "variety": "Original",
+      "description": "Coca-Cola is a refreshing and delicious carbonated beverage made with high-quality ingredients. It is the most popular carbonated beverage in the world and is enjoyed in over 200 countries. Coca-Cola is available in a variety of flavors, including original, sugar-free, Zero Sugar, and Cherry."
+    },
+    "820d42bb-27d7-468d-b420-13597cd5ea47":
+    {
+      "plu": "49000024708",
+      "name": "Sprite",
+      "brand": "Sprite",
+      "content": "16.9 fl oz",
+      "type": "Carbonated beverage",
+      "category": "Drinks",
+      "variety": "Original",
+      "description": "Sprite is a lemon-lime flavored soda pop known for its crisp, clean taste. Introduced in 1961 by The Coca-Cola Company, it quickly became a major competitor to 7 Up. Today, Sprite is one of the most popular soda pops globally, available in over 160 countries. Its refreshing citrus flavor makes it a perfect choice for quenching thirst on a hot day."
+    },
+    "2b79da9f-7279-487d-85e1-8df800450dfd":
+    {
+      "plu": "49000014235",
+      "name": "Orange Fanta",
+      "brand": "Fanta",
+      "content": "Not specified",
+      "type": "Carbonated beverage",
+      "category": "Drinks",
+      "variety": "Orange",
+      "description": "A citrus-flavored soda pop, Fanta Orange is a refreshing drink enjoyed by people of all ages.  Fanta originated in Germany in 1940 when Coca-Cola could not import its syrups due to World War II. The company created Fanta using readily available ingredients, and it proved so popular that Coca-Cola decided to keep the brand after the war."
+    },
+    "0400a6ac-f3b6-4d5a-8a90-0907490e7a77": {
+      "plu": "96619321544",
+      "name": "KIRKLAND TOWEL ROLL",
+      "brand": "Kirkland",
+      "content": "2 ply - 150 sheets",
+      "type": "Paper product",
+      "category": "Household",
+      "variety": "Perforated",
+      "description": "This Kirkland brand paper towel roll is designed for everyday cleaning tasks. It is absorbent and strong, making it ideal for tackling spills and messes. This 2-ply perforated roll comes with 150 sheets, offering long-lasting performance for your cleaning needs."
+    },
+    "7006ae86-d104-4582-afea-1cb72db57d0a": {
+      "plu": "97464903053",
+      "name": "JUBILE BIG ROLL",
+      "brand": "Jubilee",
+      "content": "3 ply - 200 sheets",
+      "type": "Paper product",
+      "category": "Household",
+      "variety": "Perforated",
+      "description": "This Jubilee brand big roll is a premium paper towel roll designed for heavy-duty cleaning tasks. It is extra absorbent and strong, making it ideal for tackling large spills and messes. This 3-ply perforated roll comes with 200 sheets, offering exceptional value and performance for your cleaning needs."
+    },
+    "7935928f-7e78-4638-8d49-c31cf00be38e": {
+      "plu": "96619194254",
+      "name": "KIRKLAND BATHROOM TISSUE",
+      "brand": "Kirkland",
+      "content": "2 ply - 120 sheets",
+      "type": "Paper product",
+      "category": "Household",
+      "variety": "2-ply",
+      "description": "This Kirkland brand bathroom tissue is soft, absorbent, and gentle on your skin. It is made with 2-ply construction for added strength and comfort. This 120-sheet roll is perfect for everyday use in your bathroom."
+    }
+  },
+  "vision_hash":
+  {
+    "1.0": "0400a6ac-f3b6-4d5a-8a90-0907490e7a77",
+    "2.0": "7006ae86-d104-4582-afea-1cb72db57d0a",
+    "3.0": "7935928f-7e78-4638-8d49-c31cf00be38e",
+    "4.0": "",
+    "5.0": "",
+    "6.0": "",
+    "7.0": "",
+    "8.0": "",
+    "9.0": "",
+    "10.0": "",
+    "11.0": "",
+    "12.0": "",
+    "13.0": "",
+    "14.0": "",
+    "15.0": "",
+    "16.0": "",
+    "17.0": "",
+    "18.0": "",
+    "19.0": "",
+    "20.0": "",
+    "21.0": "",
+    "22.0": "",
+    "23.0": "",
+    "24.0": "",
+    "25.0": "",
+    "26.0": ""
+  }
+}
