@@ -1,17 +1,14 @@
-"""Code aware of run vision from ros2 as a service."""
+"""This main node creates a service who publish requested movements over the full procedure on ."""
 
 import json
-from time import sleep
+import time
 
 import rclpy
 
-# from ros_vision.srv import ScissorsMechanismParams, VisionParams
-from example_interfaces.srv import AddTwoInts
+from vision_interfaces.srv import VisionParams
 from rclpy.node import Node
-from std_msgs.msg import String
+from std_msgs.msg import Bool, Int8MultiArray, Int32
 
-from srv_vision.camera_manager import Camera
-from srv_vision.model_manager import Evaluation
 from srv_vision.storage_manager import Shelves
 
 
@@ -20,101 +17,81 @@ class VisionService(Node):
 
     def __init__(self):
         """Init vision main service."""
-        super().__init__("vision_service")
-        self.srv = self.create_service(AddTwoInts, "start_procedure", self.procedure)
+        super().__init__("vision_service_node")
+        self.vision_service = self.create_service(
+            VisionParams, "vision_service", self.__service_callback
+        )  # Replace with aligned interface
 
-        self.communication_publisher = self.create_publisher(
-            String, "aws_communication", 1
+        self.__shift_scissors_pub = self.create_publisher(Int32, "shift_scissors", 1)
+
+        self.__rotate_camera_pub = self.create_publisher(Int32, "rotate_camera", 1)
+
+        self.__model_evaluation_pub = self.create_publisher(
+            Int8MultiArray, "model_evaluate", 10
         )
 
-        self.scissors_position_publisher = self.create_publisher(
-            String, "scissors_movement", 1
-        )
+        self.__shelves = Shelves()
 
-        self.scissors_microservo_publisher = self.create_publisher(
-            String, "scissors_servo", 1
-        )
+        self.__shift_scissors_msgs = Int32()
+        self.__rotate_camera_msgs = Int32()
+        self.__model_evaluation_msgs = Int8MultiArray()
 
-        self.logger_publisher = self.create_publisher(String, "write_file", 10)
+        self.__aruco_id = -1
+        self.servo_side = True
 
-        # self.scissor_client = self.create_client(
-        #    ScissorsMechanismParams, "shift_scissors_mechanism"
-        # )
+    def srv_publish_topic(self, topic_name: str, topic_value: any):
+        """Simplification of publisher for casting and waiting default methods."""
+        if topic_name == "shift_scissors":
+            self.__rotate_camera_msgs.data = topic_value
+            self.__shift_scissors_pub.publish(self.__rotate_camera_msgs)
+            time.sleep(5)
+        elif topic_name == "rotate_camera":
+            topic_value = 0 if topic_value == "right" else 180
+            self.__rotate_camera_msgs.data = topic_value
+            self.servo_side = topic_value == 0
+            self.__rotate_camera_pub.publish(self.__rotate_camera_msgs)
+            time.sleep(3)
+        elif topic_name == "model_evaluate":
+            self.__model_evaluation_msgs.data = list(topic_value.values())
+            self.__model_evaluation_pub.publish(self.__model_evaluation_msgs)
 
-        # while not self.scissor_client.wait_for_service(timeout_sec=1.0):
-        #    self.get_logger().info("Error: Timeout response ScissorsMechanism")
-
-        self.shelves = Shelves()  # Prefered to be a with Shelves() as :
-        self.camera = Camera()
-        self.vision_model = Evaluation()
-        # self.logger = Logs()
-
-        # self.scissors_request = ScissorsMechanismParams.Request()
-
-    def procedure(self, request, response):
+    def __service_callback(self, request, response):
         """Main loop to run all needed procesess."""
-        aruco_id = request.a  # request.ArUco_id
-        self.position = self.shelves.search_by_aruco_id(aruco_id)
-        aisle, shelf, section = self.position
-        self.distances = self.shelves.search_shelves(aisle, shelf, section)
+        self.__aruco_id = request.aruco_id
+        self.__shelves_map = self.__shelves.search_by_aruco_id(self.__aruco_id)
+        setpoints = (
+            self.__shelves_map["left"]["setpoints"]
+            + self.__shelves_map["right"]["setpoints"]
+        )
 
-        scissors_movement_msg = String()
-        scissors_servo_msg = String()
-        logger_msg = String()
+        location = {
+            "aisle": -1,
+            "shelf": -1,
+            "aruco_id": self.__aruco_id,
+            "setpoint_index": -1,
+        }
 
-        for index, distance in enumerate(self.distances):
-            scissors_movement_msg.data = str(distance)
-            self.scissors_position_publisher.publish(scissors_movement_msg)
-            sleep(5)
+        for i, _setpoint in enumerate(sorted(list(dict.fromkeys(setpoints)))):
+            location["setpoint_index"] = i
+            self.srv_publish_topic("shift_scissors", _setpoint)
+            for side_key in ["right", "left"] if self.servo_side else ["left", "right"]:
+                if _setpoint not in self.__shelves_map[side_key]["setpoints"]:
+                    continue
+                location.update(
+                    {
+                        "aisle": self.__shelves_map[side_key]["aisle"],
+                        "shelf": self.__shelves_map[side_key]["shelf"],
+                    }
+                )
 
-            frame = self.camera.get_frame()
-            reduced_boxes = self.vision_model.evaluate(frame)
+                self.srv_publish_topic("rotate_camera", side_key)
+                self.srv_publish_topic("model_evaluate", location)
 
-            location = f"R,{aisle},{shelf},{section},{index}"
-            logger_dict_save = {"location": location, "totals": reduced_boxes}
+        self.srv_publish_topic("shift_scissors", 0)
+        self.srv_publish_topic("rotate_camera", 0)
 
-            logger_msg.data = json.dumps(logger_dict_save)
-            self.logger_publisher.publish(logger_msg)
-
-            scissors_servo_msg.data = "180"
-            self.scissors_microservo_publisher.publish(scissors_servo_msg)
-            sleep(2)
-
-            frame = self.camera.get_frame()
-            reduced_boxes = self.vision_model.evaluate(frame)
-
-            location = f"L,{aisle},{shelf},{section},{index}"
-            logger_dict_save = {"location": location, "totals": reduced_boxes}
-
-            logger_msg.data = json.dumps(logger_dict_save)
-            self.logger_publisher.publish(logger_msg)
-
-            scissors_servo_msg.data = "0"
-            self.scissors_microservo_publisher.publish(scissors_servo_msg)
-            sleep(2)
-
-        self.logger.save_logger()
-        self.camera.release()
-
-        scissors_movement_msg.data = "0"
-        self.scissors_position_publisher.publish(scissors_movement_msg)
-
-        communication_msg = String()
-        communication_msg.data = "POST"
-        self.communication_publisher.publish(communication_msg)
-
-        response.sum = 1
-
+        response.status_code = 1
         return response
-
-        # def scissors_send_request(self, position):
-        # """Service client request runner."""
-        # self.scissors_request.position_required = position
-
-        # self.future = self.scissor_client.call_async(self.scissors_request)
-        # rclpy.spin_until_future_complete(self, self.future)
-        # return
-
 
 def main():
     """Init ros2 and node of vision service."""

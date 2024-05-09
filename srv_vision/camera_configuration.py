@@ -25,5 +25,5 @@ class CamConfig:
     ]
 
     video_flags = [
-        (cv2.CAP_PROP_AUTOFOCUS, 0),
+        (cv2.CAP_PROP_AUTOFOCUS, 0)
     ]  # (setting, value)
