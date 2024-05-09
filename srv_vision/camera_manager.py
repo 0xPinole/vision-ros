@@ -10,8 +10,12 @@ class Camera(CamConfig):
 
     def __init__(self):
         """Get camera running."""
+        self.__load_camera()
+
+    def __load_camera(self):
+        """Load camera."""
         try:
-            self.camera = cv2.VideoCapture(0)
+            self.camera = cv2.VideoCapture(2)
             if not self.camera.isOpened():
                 raise ValueError("Error: Camera not detected")
         except Exception:
@@ -20,12 +24,12 @@ class Camera(CamConfig):
             self.camera = None
 
         if self.camera is not None:
-            self.flags_setter()
+            # self.flags_setter()
+            pass
 
     def __enter__(self):
         """Logic created for ContextManager."""
-        # Logic called before entry.
-        pass
+        self.__load_camera()
 
     def __exit__(self, exception_type, exception_val, trace):
         """Logic for close class."""
@@ -34,6 +38,8 @@ class Camera(CamConfig):
 
     def flags_setter(self):
         """Set flags to self.camera from the configuration."""
+        if self.camera is None:
+            return
         for flag, value in self.video_flags:
             self.camera.set(flag, value)
 

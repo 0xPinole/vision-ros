@@ -3,14 +3,7 @@
 import datetime
 import json
 
-# import tomllib
 from uuid import uuid4
-
-#   try:
-#    import tomllib
-#   except ModuleNotFoundError:
-#    import pip._vendor.tomli as tomllib
-
 
 class Shelves:
     """Class owner of storage of shelves toml file."""
@@ -30,7 +23,7 @@ class Shelves:
     def _load_shelves(self):
         """Read and get the toml file of shelves."""
         with open(
-            "/home/roser/ros2_ws/src/srv_vision/srv_vision/db/shelves_trace.toml", "rb"
+            "/home/pinole/ros2_ws/src/srv_vision/srv_vision/db/shelves_trace.json", "r"
         ) as fg:
             self.shelves = json.load(fg)
 
@@ -81,7 +74,7 @@ class Shelves:
 
     def search_by_aruco_id(self, aruco_id: int) -> list[list[int]]:
         """Search by the aruco_id to get the distances to go down."""
-        positions = self.shelves["aruco_ids"][aruco_id]
+        positions = self.shelves["aruco_id"][str(aruco_id)]
         return positions
         # Return [[aisle, shelf, section], ...], should work with left and right
         # by len(return) === 1 or 2
@@ -168,14 +161,14 @@ class Logs:
     def _load_logger(self):
         """Load products from json database."""
         with open(
-            "/home/roser/ros2_ws/src/srv_vision/srv_vision/db/logger.json", "r"
+            "/home/pinole/ros2_ws/src/srv_vision/srv_vision/db/logger.json", "r"
         ) as fg:
             self.logs = json.load(fg)
 
     def _dump_logger(self, logs_json: dict[str, any]):
         """Overwrite json database."""
         with open(
-            "/home/roser/ros2_ws/src/srv_vision/srv_vision/db/logger.json", "w"
+            "/home/pinole/ros2_ws/src/srv_vision/srv_vision/db/logger.json", "w"
         ) as fg:
             json.dump(logs_json, fg)
 
