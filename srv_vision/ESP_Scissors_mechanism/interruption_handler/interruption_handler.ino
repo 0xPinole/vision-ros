@@ -90,8 +90,8 @@ void setup(){
   pinMode(EncA, INPUT_PULLUP);
   pinMode(EncB, INPUT_PULLUP);
 
-  attachInterrupt(digitalPinToInterrupt(EncA), Encoder, CHANGE);
-  attachInterrupt(digitalPinToInterrupt(EncB), Encoder, CHANGE);
+  //attachInterrupt(digitalPinToInterrupt(EncA), Encoder, CHANGE);
+  //attachInterrupt(digitalPinToInterrupt(EncB), Encoder, CHANGE);
 
   allocator = rcl_get_default_allocator();
 
