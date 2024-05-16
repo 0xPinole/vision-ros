@@ -596,6 +596,7 @@
   "content": "7.5 oz (fluid ounces)",
   "type": "Dish Soap",
   "category": "Cleaning Supplies",
+  "variety": "",
   "description": "Dawn Ultra Dish Soap is a powerful dishwashing liquid that effectively cuts through grease, grime, and food residue. It is well-known for its grease-fighting ability and is suitable for hand washing dishes. Dawn Ultra Dish Soap is also known for its commitment to wildlife rescue, as its formula is gentle enough to be used to clean oiled animals.  **Note:** The specific scent of this product may vary. Check the label for details.",
   "benefits": [
     "Effective grease-cutting power",
@@ -661,6 +662,7 @@
   "content": "80 wipes",
   "type": "Disinfecting wipes",
   "category": "Cleaning Supplies",
+  "variety": "",
   "description": "Lysol Disinfecting Wipes are pre-moistened wipes designed to clean and disinfect surfaces. They are effective against a broad spectrum of bacteria and viruses, including cold and flu viruses. Lysol Disinfecting Wipes are convenient for wiping down surfaces in your home, including kitchens, bathrooms, and other high-touch areas. **Always refer to the product label for specific disinfection claims and usage instructions.**",
   "benefits": [
     "Disinfects surfaces (check label for specific claims)",
@@ -693,6 +695,7 @@
   "content": "1 liter (L)",
   "type": "Multi-Purpose Cleaner",
   "category": "Cleaning Supplies",
+  "variety": "",
   "scent": "Likely Floral Scent (Red Fabuloso is commonly associated with a floral scent, but confirmation depends on specific packaging)",
   "description": "Fabuloso Multi-Purpose Cleaner (Red) is an all-purpose cleaning solution that can be used on various surfaces in your home. It is effective for cleaning floors, counters, walls, appliances, and other hard surfaces. The red color variation is likely scented with a floral fragrance, but this may vary depending on the specific product line. **Always refer to the product label for detailed cleaning instructions and suitability for different surfaces.**",
   "benefits": [
@@ -727,6 +730,7 @@
   "content": "650 ml (milliliters)",
   "type": "Laundry Bleach (possible)",
   "category": "Cleaning Supplies",
+  "variety": "",
   "description": "**Due to limited information and the possibility of brand localization, the following product information is tentative.** Chloralen Laundry Bleach is a chlorine-based bleach that may be used to whiten whites, remove stains, and disinfect laundry.  **Always consult the specific product label for detailed instructions and safety warnings before using Chloralen Laundry Bleach.**",
   "benefits": [
     "Whitens whites (check label for specific claims)",
@@ -758,6 +762,7 @@
   "content": "1 liter (L)",
   "type": "Multi-Purpose Cleaner",
   "category": "Cleaning Supplies",
+  "variety": "",
   "scent": "Likely Fresh Scent (Green Fabuloso is commonly associated with a fresh scent, but confirmation depends on specific packaging)",
   "description": "Fabuloso Multi-Purpose Cleaner (Green) is an all-purpose cleaning solution that can be used on various surfaces in your home. It is effective for cleaning floors, counters, walls, appliances, and other hard surfaces. The green color variation is likely scented with a fresh fragrance, but this may vary depending on the specific product line. **Always refer to the product label for detailed cleaning instructions and suitability for different surfaces.**",
   "benefits": [
@@ -792,6 +797,7 @@
   "content": "1 liter (L)",
   "type": "Multi-Purpose Cleaner",
   "category": "Cleaning Supplies",
+  "variety": "",
   "scent": "Likely Floral Scent (Primaveral is Spanish for 'spring' and often associated with floral scents)",
   "description": "Fabuloso Multi-Purpose Cleaner (Primaveral) is an all-purpose cleaning solution that can be used on various surfaces in your home. It is effective for cleaning floors, counters, walls, appliances, and other hard surfaces. The 'Primaveral' variation is likely scented with a floral fragrance, but this may vary depending on the specific product line. **Always refer to the product label for detailed cleaning instructions and suitability for different surfaces.**",
   "benefits": [
@@ -825,6 +831,7 @@
   "brand": "Reynolds",
   "type": "Oven Bags",
   "category": "Cooking Supplies",
+  "variety": "",
   "description": "Reynolds Oven Bags are heat-resistant bags designed to trap moisture and heat while cooking food in your oven. This can result in juicier and more tender food, easier cleanup, and potentially faster cooking times.  **Always refer to the specific package instructions for weight capacity and temperature recommendations.**",
   "benefits": [
     "Juicier and more tender food (by trapping moisture)",
@@ -850,6 +857,7 @@
   "content": "828 ml (milliliters)  (US equivalent: 28 fl oz (fluid ounces))",
   "type": "Dish Liquid",
   "category": "Cleaning Supplies",
+  "variety": "",
   "scent": "Original (likely mild or clean scent, but confirmation depends on specific packaging)",
   "description": "Palmolive Original Dish Liquid is an all-purpose dishwashing detergent designed to cut through grease and grime on your dishes. It is effective for cleaning pots, pans, plates, utensils, and other kitchenware. The 'Original' scent is likely a mild or clean scent, but this may vary depending on the specific product line. **Always refer to the product label for detailed cleaning instructions and suitability for different surfaces.**",
   "benefits": [
@@ -883,6 +891,7 @@
   "content": "Size unspecified (check packaging)",
   "type": "Cleaning Powder",
   "category": "Cleaning Supplies",
+  "variety": "",
   "description": "Comet Cleanser is a brand of powdered cleaning products typically used for scrubbing and polishing surfaces in kitchens and bathrooms. It's effective in removing tough stains, grease, and grime. There are various Comet Cleanser formulas for specific cleaning tasks. **Always refer to the product label for detailed instructions and safety warnings before using Comet Cleanser.**",
   "benefits": [
     "Effective cleaning for tough stains, grease, and grime",
@@ -895,7 +904,7 @@
     "**Always consult the specific product label for detailed instructions and dosage information before using Comet Cleanser.**",
     "Comet Cleanser is typically applied to a damp sponge or cloth and used to scrub surfaces.",
     "The recommended application time and rinsing instructions may vary depending on the variety.",
-    "Do not mix Comet Cleanser with other cleaning products.",
+    "Do not mix Comet Cleanser with other cleaning products."
   ],
   "tips": [
     "Test Comet Cleanser on an inconspicuous area before applying it to a large surface.",
@@ -914,6 +923,7 @@
   "content": "56 oz (fluid ounces)",
   "type": "Multi-Purpose Cleaner",
   "category": "Cleaning Supplies",
+  "variety": "",
   "scent": "Lavender",
   "description": "Fabuloso Multi-Purpose Cleaner Lavender Scent is a versatile cleaning product designed to tackle a variety of cleaning tasks in your home. It effectively cleans floors, kitchens, bathrooms, and other surfaces, leaving behind a fresh lavender fragrance. The lavender scent is typically described as calming and refreshing. **Always refer to the product label for detailed cleaning instructions and suitability for different surfaces.**",
   "benefits": [
@@ -949,6 +959,7 @@
   "content": "21 milliliters (ml)",
   "type": "Electric Diffuser Refill",
   "category": "Home Fragrance",
+  "variety": "",
   "scent": "Turquoise Oasis (likely a refreshing or water-inspired fragrance)",
   "description": "Air Wick Turquoise Oasis is a refill for an Air Wick electric diffuser. It is a small refill size (21ml) and may be part of a starter kit that includes a diffuser unit. The exact scent of 'Turquoise Oasis' is not confirmed, but the name suggests a refreshing or water-inspired fragrance.",
   "benefits": [
