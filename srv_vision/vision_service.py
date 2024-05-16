@@ -23,9 +23,7 @@ class VisionService(Node):
         )  # Replace with aligned interface
 
         self.__shift_scissors_pub = self.create_publisher(Int32, "shift_scissors", 1)
-
         self.__rotate_camera_pub = self.create_publisher(Int32, "rotate_camera", 1)
-
         self.__model_evaluation_pub = self.create_publisher(
             Int8MultiArray, "model_evaluate", 10
         )

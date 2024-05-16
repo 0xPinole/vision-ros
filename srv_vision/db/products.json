@@ -722,8 +722,8 @@
 },
 "a3976446-b241-4d7a-a451-7d855f5616dc": {
   "plu": "43152020656",
-  "name": "Chloralen Laundry Bleach (possibly)",
-  "brand": "Chloralen (の可能性)",
+  "name": "Chloralen Laundry (possibly)",
+  "brand": "Chloralen",
   "content": "650 ml (milliliters)",
   "type": "Laundry Bleach (possible)",
   "category": "Cleaning Supplies",
@@ -842,36 +842,171 @@
   ],
   "additional_information": "Reynolds is a popular brand of kitchen supplies, including oven bags. Oven bags are a convenient way to cook food while retaining moisture and flavor. By following these tips and the instructions on the package, you can use Reynolds Oven Bags to create delicious and flavorful meals.",
   "image": "[Image of Reynolds Oven Bags (package size unspecified)]"
+},
+"24f56d61-40ff-4fbc-a296-3edfea3cc285": {
+  "plu": "35000463036",
+  "name": "Palmolive Original Dish Liquid",
+  "brand": "Palmolive",
+  "content": "828 ml (milliliters)  (US equivalent: 28 fl oz (fluid ounces))",
+  "type": "Dish Liquid",
+  "category": "Cleaning Supplies",
+  "scent": "Original (likely mild or clean scent, but confirmation depends on specific packaging)",
+  "description": "Palmolive Original Dish Liquid is an all-purpose dishwashing detergent designed to cut through grease and grime on your dishes. It is effective for cleaning pots, pans, plates, utensils, and other kitchenware. The 'Original' scent is likely a mild or clean scent, but this may vary depending on the specific product line. **Always refer to the product label for detailed cleaning instructions and suitability for different surfaces.**",
+  "benefits": [
+    "Cuts through grease and grime",
+    "Effective for cleaning various dishes and cookware",
+    "Pleasant original scent (likely mild or clean)",
+    "May have other scents available (check packaging for details)"
+  ],
+  "how_to_use": [
+    "**Always consult the specific product label for recommended dilution ratios before using Palmolive Original Dish Liquid.**",
+    "Palmolive Original Dish Liquid is typically diluted with water before use. The recommended dilution ratio will vary depending on the cleaning task (refer to label instructions).",
+    "Apply the diluted cleaning solution to a sponge or dishcloth.",
+    "Wash your dishes and utensils with the soapy sponge or cloth.",
+    "Rinse dishes thoroughly with clean water.",
+    "For heavily soiled dishes, you may need to pre-soak or apply the undiluted solution directly to the greasy area.",
+    "**Important:** Avoid contact with eyes and skin. Keep out of reach of children and pets."
+  ],
+  "tips": [
+    "Wear gloves for prolonged use or if you have sensitive skin.",
+    "For greasy dishes, you can use a higher concentration of the cleaning solution.",
+    "Rinse dishes thoroughly with clean water, especially those that will come into contact with food.",
+    "Store Palmolive Original Dish Liquid in a cool, dry place. Do not mix it with other cleaning products."
+  ],
+  "additional_information": "Palmolive is a well-known brand of dishwashing liquids. Palmolive Original Dish Liquid is a versatile dishwashing detergent that can tackle tough grease and grime. Remember to follow the safety instructions on the product label and check the specific dilution instructions and scent details before use.",
+  "image": "[Image of Palmolive Original Dish Liquid 828ml (US equivalent: 28 fl oz)]"
+},
+"a1a0d5f3-725c-46c9-923a-e664da494439": {
+  "plu": "810000000000",
+  "name": "Comet Cleanser (unspecified variety)",
+  "brand": "Comet",
+  "content": "Size unspecified (check packaging)",
+  "type": "Cleaning Powder",
+  "category": "Cleaning Supplies",
+  "description": "Comet Cleanser is a brand of powdered cleaning products typically used for scrubbing and polishing surfaces in kitchens and bathrooms. It's effective in removing tough stains, grease, and grime. There are various Comet Cleanser formulas for specific cleaning tasks. **Always refer to the product label for detailed instructions and safety warnings before using Comet Cleanser.**",
+  "benefits": [
+    "Effective cleaning for tough stains, grease, and grime",
+    "May have disinfecting properties (check variety)",
+    "May have whitening properties (check variety)",
+    "Available in various formulas for specific cleaning needs (check packaging)"
+  ],
+  "how_to_use": [
+    "**Important safety information:** Wear gloves and protective clothing when handling Comet Cleanser. Avoid contact with eyes and skin. Keep out of reach of children and pets.",
+    "**Always consult the specific product label for detailed instructions and dosage information before using Comet Cleanser.**",
+    "Comet Cleanser is typically applied to a damp sponge or cloth and used to scrub surfaces.",
+    "The recommended application time and rinsing instructions may vary depending on the variety.",
+    "Do not mix Comet Cleanser with other cleaning products.",
+  ],
+  "tips": [
+    "Test Comet Cleanser on an inconspicuous area before applying it to a large surface.",
+    "For heavily soiled areas, you may need to apply Comet Cleanser directly and scrub more vigorously.",
+    "Consider using a specific Comet Cleanser variety designed for your cleaning needs (e.g., disinfecting, bathroom).",
+    "Rinse surfaces thoroughly with clean water after using Comet Cleanser, especially in areas where food contact occurs.",
+    "Store Comet Cleanser in a cool, dry place. Keep out of reach of children and pets."
+  ],
+  "additional_information": "Comet Cleanser is a popular brand known for its effectiveness in cleaning tough messes. By choosing the appropriate variety and following the safety instructions, Comet Cleanser can be a helpful tool for keeping your home clean. Remember to check the specific packaging information for details on disinfecting properties, whitening properties, and suitability for different surfaces.",
+  "image": "[Image of Comet Cleanser (unspecified variety)]"
+},
+"148cff8b-4a54-419f-8be2-9e058b822fe1": {
+  "plu": "100000",
+  "name": "Fabuloso Multi-Purpose Cleaner Lavender Scent (56 oz)",
+  "brand": "Fabuloso",
+  "content": "56 oz (fluid ounces)",
+  "type": "Multi-Purpose Cleaner",
+  "category": "Cleaning Supplies",
+  "scent": "Lavender",
+  "description": "Fabuloso Multi-Purpose Cleaner Lavender Scent is a versatile cleaning product designed to tackle a variety of cleaning tasks in your home. It effectively cleans floors, kitchens, bathrooms, and other surfaces, leaving behind a fresh lavender fragrance. The lavender scent is typically described as calming and refreshing. **Always refer to the product label for detailed cleaning instructions and suitability for different surfaces.**",
+  "benefits": [
+    "Cleans multiple surfaces: floors, kitchens, bathrooms, and more",
+    "Fresh lavender fragrance",
+    "Cuts through grease and grime",
+    "No rinsing required for most surfaces",
+    "Safe for use on septic tanks"
+  ],
+  "how_to_use": [
+    "**Always consult the specific product label for detailed instructions and dilution ratios before using Fabuloso Multi-Purpose Cleaner Lavender Scent.**",
+    "For floors:** Dilute 1/4 cup in 1 gallon of water. Mop your floors as usual. No rinsing required.",
+    "For kitchens:** Apply directly to a sponge or cloth and wipe down surfaces. Rinse with water if desired.",
+    "For bathrooms:** Apply directly to a sponge or cloth and wipe down surfaces. Rinse with water if desired.",
+    "For other surfaces:** Test on an inconspicuous area first. If the surface is compatible, apply directly to a sponge or cloth and wipe down. Rinse with water if desired.",
+    "**Important:** Avoid contact with eyes and skin. Keep out of reach of children and pets."
+  ],
+  "tips": [
+    "Wear gloves for prolonged use or if you have sensitive skin.",
+    "For heavily soiled areas, you may need to apply the cleaning solution directly and scrub more vigorously.",
+    "For stubborn stains, you may need to let the cleaning solution sit for a few minutes before wiping.",
+    "Rinse surfaces thoroughly with clean water, especially those that will come into contact with food.",
+    "Store Fabuloso Multi-Purpose Cleaner Lavender Scent in a cool, dry place. Do not mix it with other cleaning products."
+  ],
+  "additional_information": "Fabuloso is a popular brand of cleaning products known for their effectiveness and pleasant fragrances. Fabuloso Multi-Purpose Cleaner Lavender Scent is a versatile and effective cleaner that can help you keep your home clean and fresh-smelling. Remember to follow the safety instructions on the product label and check the specific dilution ratios and suitability for different surfaces before use.",
+  "image": "[Image of Fabuloso Multi-Purpose Cleaner Lavender Scent (56 oz)]"
+},
+
+"cb39225c-d9ff-41dd-ad70-206845893985": {
+  "plu": "200000",
+  "name": "Air Wick Turquoise Oasis Refill (21ml)",
+  "brand": "Air Wick",
+  "content": "21 milliliters (ml)",
+  "type": "Electric Diffuser Refill",
+  "category": "Home Fragrance",
+  "scent": "Turquoise Oasis (likely a refreshing or water-inspired fragrance)",
+  "description": "Air Wick Turquoise Oasis is a refill for an Air Wick electric diffuser. It is a small refill size (21ml) and may be part of a starter kit that includes a diffuser unit. The exact scent of 'Turquoise Oasis' is not confirmed, but the name suggests a refreshing or water-inspired fragrance.",
+  "benefits": [
+    "Freshens the air and eliminates unpleasant odors",
+    "Provides a subtle and refreshing fragrance",
+    "Easy to use and replace in compatible Air Wick diffusers",
+    "Compact size makes it convenient for storage"
+  ],
+  "how_to_use": [
+    "**Important:** Always refer to the specific instructions for your Air Wick diffuser model before using the Turquoise Oasis refill.",
+    "Generally, the process involves removing the old refill cartridge, inserting the new Turquoise Oasis refill, and powering on the diffuser.",
+    "Adjust the fragrance intensity setting if your diffuser has this feature.",
+    "Place the diffuser in a well-ventilated area and enjoy the refreshing fragrance."
+  ],
+  "tips": [
+    "For optimal performance, replace the Air Wick Turquoise Oasis refill regularly as recommended by the manufacturer.",
+    "Clean your diffuser according to the manufacturer's instructions to ensure proper fragrance diffusion and prevent clogging.",
+    "Experiment with different Air Wick refill fragrances to find your favorites.",
+    "Air Wick Turquoise Oasis is designed for use in electric diffusers. Do not use it in other types of air fresheners or appliances."
+  ],
+  "additional_information": "Air Wick is a popular brand of air fresheners and home fragrance products. The Turquoise Oasis refill is a convenient and affordable way to enjoy a refreshing fragrance in your home. Remember to follow the safety instructions on the product packaging and use the refill only in compatible Air Wick diffusers.",
+  "image": "[Image of Air Wick Turquoise Oasis Refill (21ml)]"
 }
+
+
   },
   "vision_hash":
   {
-    "1.0": "0400a6ac-f3b6-4d5a-8a90-0907490e7a77",
-    "2.0": "7006ae86-d104-4582-afea-1cb72db57d0a",
-    "3.0": "e7aca974-e2c0-4511-89a8-bea0576f7a90",
-    "4.0": "e0ba19ef-2482-4060-b4a5-033bba91754e",
-    "5.0": "f552e15e-64d7-425e-a4d5-68e96081ee70",
-    "6.0": "31c0ef06-a714-452f-a7bc-bc58e327cf5f",
-    "7.0": "db703e5a-fabf-4884-a42b-936887464f74",
-    "8.0": "067fffe8-e2ea-4dd5-8de0-397c9d243f20",
-    "9.0": "31c76929-c822-466e-8e38-836254e5abfc",
-    "10.0": "1a06dfa3-ffda-4bd9-ae71-9d92330fe6f1",
-    "11.0": "7b6e2502-eb97-482b-8bc3-2e7d55b1d497",
-    "12.0": "4b0dea26-8912-4a8c-ac56-b7a2b7cad06d",
-    "13.0": "620c8e52-e48a-4c43-b524-685df6aeee01",
-    "14.0": "9ab8f55b-9575-4ad5-a6cf-fe553cc838d0",
-    "15.0": "601d8151-fcfe-4654-8651-cbfa3985945d",
-    "16.0": "fb8aa26a-64c2-42c2-aef8-533864430c30",
-    "17.0": "b130e3a9-fb58-49ec-ac35-881d762a6340",
-    "18.0": "f9044f9a-82ea-474c-8e00-545aca784321",
-    "19.0": "5a90ddf7-e123-4123-830f-534b77ed24fa",
-    "20.0": "6c28c839-6f86-4c0e-a12d-175655edb89b",
-    "21.0": "972fd597-7106-45af-bea6-852b46feedd4",
-    "22.0": "d404ff2a-6928-40c3-a9aa-941b40b78a9b",
-    "23.0": "8b00df0f-9942-4885-a23e-6700062488d0",
-    "24.0": "a3976446-b241-4d7a-a451-7d855f5616dc",
-    "25.0": "81379fa8-292e-4a36-97e2-8280a816cf6e",
-    "26.0": "d7f527de-5193-4f85-826e-a9489ccfa3ce",
+    "AIRWICK":"cb39225c-d9ff-41dd-ad70-206845893985",
+    "AJAX-BLEACH-14OZ": "620c8e52-e48a-4c43-b524-685df6aeee01",
+    "AXION-LIMON425G": "f552e15e-64d7-425e-a4d5-68e96081ee70",
+    "BATH-TISSUE-KIRKLAND": "e7aca974-e2c0-4511-89a8-bea0576f7a90",
+    "CLORALEN-650ML": "a3976446-b241-4d7a-a451-7d855f5616dc",
+    "CLORALEX-BLECH-950ML": "b130e3a9-fb58-49ec-ac35-881d762a6340",
+    "COMET":"a1a0d5f3-725c-46c9-923a-e664da494439",
+    "DAWN-7.5-OZ": "6c28c839-6f86-4c0e-a12d-175655edb89b",
+    "EASY-OFF-24-OZ": "7b6e2502-eb97-482b-8bc3-2e7d55b1d497",
+    "FABULOSO-GREEN": "81379fa8-292e-4a36-97e2-8280a816cf6e",
+    "FABULOSO-LAVANDA-56OZ":"148cff8b-4a54-419f-8be2-9e058b822fe1",
+    "FABULOSO-PRIMAVERAL": "d7f527de-5193-4f85-826e-a9489ccfa3ce",
+    "FABULOSO-RED-1L": "8b00df0f-9942-4885-a23e-6700062488d0",
+    "GLAD-15BAGS-39gal-FO": "5a90ddf7-e123-4123-830f-534b77ed24fa",
+    "JUBILE-BIG-ROLL": "7006ae86-d104-4582-afea-1cb72db57d0a",
+    "KIRKLAN-TOWEL-ROLL": "0400a6ac-f3b6-4d5a-8a90-0907490e7a77",
+    "LYSOL-80WIPES": "d404ff2a-6928-40c3-a9aa-941b40b78a9b",
+    "LYSOL-SPRAY-19-OZ": "601d8151-fcfe-4654-8651-cbfa3985945d",
+    "MELODY-NAPKINS-180CT": "31c76929-c822-466e-8e38-836254e5abfc",
+    "NAPKINS-KIRTLAND": "31c0ef06-a714-452f-a7bc-bc58e327cf5f",
+    "OVEN-BAGS": "e0ba19ef-2482-4060-b4a5-033bba91754e",
+    "OVEN-BAGS-TASTIER": "9ab8f55b-9575-4ad5-a6cf-fe553cc838d0",
+    "PINALEN-28FL": "4b0dea26-8912-4a8c-ac56-b7a2b7cad06d",
+    "REYNOLDS-WRAP-30SQ": "1a06dfa3-ffda-4bd9-ae71-9d92330fe6f1",
+    "SALVO-LIMON-500ML": "f9044f9a-82ea-474c-8e00-545aca784321",
+    "WINDEX-ORIGINAL-23OZ": "fb8aa26a-64c2-42c2-aef8-533864430c30",
+    "ZIPLOC-40-UND": "067fffe8-e2ea-4dd5-8de0-397c9d243f20",
+    "palmolive":"24f56d61-40ff-4fbc-a296-3edfea3cc285",
+
+    "u-ARIEL D.P./2KG": "972fd597-7106-45af-bea6-852b46feedd4",
     "default": "ba50049a-38d5-41ee-b0b6-64d93efa81f2"
   }
 }

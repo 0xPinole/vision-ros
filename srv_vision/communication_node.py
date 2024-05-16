@@ -41,7 +41,7 @@ class DataManager(Node):
                     position = capture["location"].split(",")
                     if fetches.get(class_prod) is None:
                         side = position[0]
-                        aisle = position[1] if side == "R" else position[1] + 1
+                        aisle = position[1] if "R" in side else position[1] + 1
                         shelf = position[2]
                         jpost = self.post_product(class_prod, stock, aisle, shelf)
                         fetches_msg.data = json.dumps(
@@ -92,5 +92,4 @@ class DataManager(Node):
 
             self.aws_client.post(json_send)
 
-        # True On success, else False
         return json_send

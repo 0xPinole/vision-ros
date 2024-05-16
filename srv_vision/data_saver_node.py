@@ -43,7 +43,7 @@ class DataSaver(Node):
             response.status_code = 200
         else:
             response.status_code = 400
-        print(response.status_code)
+        print("[+] Data writer : ", response.status_code)
         return response
 
 def main():
