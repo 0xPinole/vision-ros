@@ -8,11 +8,9 @@ from std_msgs.msg import String
 
 from srv_vision.storage_manager import Logs
 
-from vision_interfaces.srv import DataParams
-
 
 class Data(Node):
-    """WIP."""
+    """This node was created in order to take control of all trying of writing on databases, once each of the subscribes receives the correspondance execution, it writes on the file and then saves the data, the """
 
     def __init__(self):
         """WIP."""
