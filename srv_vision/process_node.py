@@ -14,8 +14,8 @@ class Procedure(Node):
     and getting a positional status, send to evaluation node the request
     to predict the model for the products on frame.
     """
-    self.evaluate = False
-    self.frame = None
+    evaluate = False
+    frame = None
 
     def __init__(self):
         """Set a service who enables or disable the connection.
@@ -37,6 +37,7 @@ class Procedure(Node):
             self.positionalframe_msg.y = scissors_position.y
 
             self.evaluate_pub.publish(positionalframe_msg)
+
 
     def camera_callback(self, frame):
         self.frame = frame.frame

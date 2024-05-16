@@ -58,7 +58,6 @@ class EvaluationsDB:
             self.logs["execution"].append({
                     "timestamp": now_str,
                     "capture": {},
-                    "capture_release": {},
                     "fetch": {},
             })
 
@@ -69,29 +68,21 @@ class EvaluationsDB:
 
         self.write_file()
 
-    def save_release(self, code_name: str, data: dict[str, any]):
-        self.logs["execution"][-1]["capture_release"][code_name] = data
-        self.write_file()
-
-    def save_fetch(self, fetch_key: str, fetch_data: dict[str, any]):
-        self.logs["execution"][-1]["fetches"][fetch_key] = fetch_data
+    def save_fetch(self, code_name: str, data: dict[str, any]):
+        self.logs["execution"][-1]["fetch"][code_name] = data
         self.write_file()
 
     def get_captures(self):
         predictions = self.logs["execution"][-1]["capture"]
         return predictions
 
-    def get_releases(self):
-        releases = self.logs["execution"][-1]["capture_release"]
-        return releases
-
-    def get_previous_releases(self, code_name: str, lookback: int = 2):
+    def get_previous_fetches(self, code_name: str, lookback: int = 2):
         response = []
         top_lookback = len(self.logs["execution"])
         lookback = min(top_lookback, lookback)
 
         for index in range(-1, -lookback -1, -1):
-            release = self.logs["execution"][index]["capture_release"].get(code_name)
+            release = self.logs["execution"][index]["fetch"].get(code_name)
             response.append(release)
 
         return response

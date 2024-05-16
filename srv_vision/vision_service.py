@@ -16,7 +16,7 @@ from srv_vision.storage_manager import Shelves
 
 class VisionService(Node):
     """Node and service in charge of provide a procedure."""
-    self.aruco_id = -1
+    aruco_id = -1
 
     def __init__(self):
         """Init vision main service.

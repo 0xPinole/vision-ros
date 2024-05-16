@@ -16,10 +16,10 @@ class Evaluation(Node):
     then crosses the class name with the uuid4 from product primary key
     and finally saves the lecture at logger database.
     """
-    self.frame_width_px = 480
-    self.frame_height_px = 640
-    self.frame_width_cm = 60
-    self.frame_height_cm = 40
+    frame_width_px = 480
+    frame_height_px = 640
+    frame_width_cm = 60
+    frame_height_cm = 40
 
     def __init__(self):
         """WIP."""
@@ -35,7 +35,7 @@ class Evaluation(Node):
         frame_base_y = int((positionframe_msg.y - (self.frame_height_cm/2)) * (self.frame_height_px / self.frame_height_cm))
 
         frame = np.array(positionframe_msg.frame).reshape(480, 640)
-        result = self.model.predict(frame)
+        result = self.model.predict(frame) # benchmarking with parameters
         result = result[0]
         result = result.boxes.cpu()
         res_xyxy = result.xyxy.numpy()
