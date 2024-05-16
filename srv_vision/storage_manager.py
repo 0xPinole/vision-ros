@@ -3,8 +3,6 @@
 import datetime
 import json
 
-from uuid import uuid4
-
 class Shelves:
 
     def __init__(self):
@@ -23,7 +21,6 @@ class Shelves:
 
 
 class Products:
-
     def __init__(self):
         self.load_products()
 
@@ -72,22 +69,11 @@ class EvaluationsDB:
 
         self.write_file()
 
-    def get_previous_releases(self, code_name: str, lookback: int = 2):
-        response = []
-        top_lookback = len(self.logs["execution"])
-        lookback = min(top_lookback, lookback)
-
-        for index in range(-1, -lookback -1, -1):
-            release = self.logs["execution"][index]["capture_release"].get(code_name)
-            response.append(release)
-
-        return response
-
     def save_release(self, code_name: str, data: dict[str, any]):
         self.logs["execution"][-1]["capture_release"][code_name] = data
         self.write_file()
 
-    def insert_fetch(self, fetch_key: str, fetch_data: dict[str, any]):
+    def save_fetch(self, fetch_key: str, fetch_data: dict[str, any]):
         self.logs["execution"][-1]["fetches"][fetch_key] = fetch_data
         self.write_file()
 
@@ -98,6 +84,17 @@ class EvaluationsDB:
     def get_releases(self):
         releases = self.logs["execution"][-1]["capture_release"]
         return releases
+
+    def get_previous_releases(self, code_name: str, lookback: int = 2):
+        response = []
+        top_lookback = len(self.logs["execution"])
+        lookback = min(top_lookback, lookback)
+
+        for index in range(-1, -lookback -1, -1):
+            release = self.logs["execution"][index]["capture_release"].get(code_name)
+            response.append(release)
+
+        return response
 
     def get_fetches(self):
         fetches = self.logs["execution"][-1]["fetch"]

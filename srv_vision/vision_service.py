@@ -49,7 +49,7 @@ class VisionService(Node):
         """Main loop to run all needed procesess."""
         shelf_map = self.shelves.get_shelf(request.aruco_id)
         self.scissors_msg.theta = 0
-        self.scissors_msg.x = 0
+        self.scissors_msg.x = 1000
 
         for side in ["left", "right"]:
             if shelf_map.get(side) is not None:
@@ -91,7 +91,7 @@ def main():
     """
     rclpy.init()
 
-    node_launcher = Procedure()
+    node_launcher = VisionService()
 
     rclpy.spin(node_launcher)
 
