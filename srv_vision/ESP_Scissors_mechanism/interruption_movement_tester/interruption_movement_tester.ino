@@ -42,7 +42,6 @@ void setup(){
 
   attachInterrupt(digitalPinToInterrupt(EncA), Encoder, CHANGE);
 
-
   expected_position = 0;
   position = 0;
 }
