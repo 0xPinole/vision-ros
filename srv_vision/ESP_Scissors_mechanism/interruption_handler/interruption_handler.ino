@@ -15,15 +15,16 @@ const int EncB = 13;
 const int In1 = 25;
 const int In2 = 26;
 
-std_msgs__msg__Int32 msg1;
-std_msgs__msg__Int32 msg2;
-std_msgs__msg__Int32 pub1_msg;
-std_msgs__msg__Int32 pub2_msg;
+const int max_pulses = 2280;
+const int pwm_value = 30;
+const int move_timeout = 30;
 
-rcl_publisher_t publisher1;
-rcl_publisher_t publisher2;
-rcl_subscription_t subscriber1;
-rcl_subscription_t subscriber2;
+
+std_msgs__msg__Int32 msg;
+std_msgs__msg__Int32 pub_msg;
+
+rcl_publisher_t publisher;
+rcl_subscription_t subscriber;
 rclc_executor_t executor;
 rclc_support_t support;
 rcl_allocator_t allocator;
@@ -33,45 +34,48 @@ rcl_timer_t timer;
 #define RCCHECK(fn) { rcl_ret_t temp_rc = fn; if((temp_rc != RCL_RET_OK)){printf("[!] RCCHECK");}}
 #define RCSOFTCHECK(fn) { rcl_ret_t temp_rc = fn; if((temp_rc != RCL_RET_OK)){printf("[!] RSOFTCHECK");}}
 
-int expected_position = 0;
-int camera_servo_angle = 0;
-int error_position = 0;
+int target_motor = 0;
+int current_motor = 0;
+int pulses_motor = 0;
+int target_pulses = 0;
+bool direction_motor = true;
 
-int pwm_value = 0;
-int max_pulses = 4560;
+void reset_process(){
+  if (direction_motor){
+    current_motor += pulses_motor;
+  }else{
+    current_motor -= pulses_motor;
+  }
+  pulses_motor = 0;
+  target_pulses = 0;
+}
 
-float position = 0;
-int revolutions = 0;
-long current_pulse = 0;
-
-volatile bool Aset = 0;
-volatile bool Bset = 0;
-
-bool movement_direction = true;
-float last_position = 0;
+void start_req(){
+  int error = target_motor - current_motor;
+  target_pulses = abs(error);
+  if(target_pulses < 27){ // 27 pulses is eq to max conversion error from 1 rad
+    target_pulses = 0;
+  }
+  direction_motor = (error >= 0);
+}
 
 void publisher_callback(rcl_timer_t * timer, int64_t last_call_time){
   RCLC_UNUSED(last_call_time);
   if (timer != NULL) {
-    pub1_msg.data = current_pulse;
-    RCSOFTCHECK(rcl_publish(&publisher1, &pub1_msg, NULL));
+    pub_msg.data = current_motor;
+    RCSOFTCHECK(rcl_publish(&publisher, &pub_msg, NULL));
   }
 }
 
 void subscription_callback_scissors(const void * msgin){
-  const std_msgs__msg__Int32 * msg1 = (const std_msgs__msg__Int32 *)msgin;
-  expected_position = msg1->data;
-  pwm_value = 30;
-  //current_pulse = 0;
+  reset_process();
+  const std_msgs__msg__Int32 * msg_sub = (const std_msgs__msg__Int32 *)msgin;
+  target_motor = msg_sub->data;
+  start_req();
 }
 
-void IRAM_ATTR Encoder() {
-  current_pulse++;
-  /*if(current_pulse == expected_position){
-    pwm_value = 0;
-    analogWrite(In1, 0);
-    analogWrite(In2, 0);
-  }*/
+void IRAM_ATTR Encoder(){
+  pulses_motor++;
 }
 
 void setup(){
@@ -90,13 +94,13 @@ void setup(){
   RCCHECK(rclc_node_init_default(&node, "scissors_motor", "", &support));
 
   RCCHECK(rclc_subscription_init_default(
-    &subscriber1,
+    &subscriber,
     &node,
     ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32),
     "scissors_movement"));
 
   RCCHECK(rclc_publisher_init_default(
-    &publisher1,
+    &publisher,
     &node,
     ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32),
     "scissors_position"));
@@ -109,27 +113,26 @@ void setup(){
     publisher_callback));
 
   RCCHECK(rclc_executor_init(&executor, &support.context, 3, &allocator));
-  RCCHECK(rclc_executor_add_subscription(&executor, &subscriber1, &msg1, &subscription_callback_scissors, ON_NEW_DATA));
+  RCCHECK(rclc_executor_add_subscription(&executor, &subscriber, &msg, &subscription_callback_scissors, ON_NEW_DATA));
   RCCHECK(rclc_executor_add_timer(&executor, &timer));
 
-  pub1_msg.data = 0;
-
-  expected_position = 0;
-  position = 0;
+  pub_msg.data = 0;
 }
 
-void movement(bool dir){
-  analogWrite(In1,  dir * pwm_value);
-  analogWrite(In2, !dir * pwm_value);
-  delay(1);
+void movement(){
+  analogWrite(In1,  direction_motor * pwm_value);
+  analogWrite(In2, !direction_motor * pwm_value);
+  delay(move_timeout);
   analogWrite(In1, 0);
   analogWrite(In2, 0);
 }
 
 void loop(){
   RCSOFTCHECK(rclc_executor_spin_some(&executor, RCL_MS_TO_NS(100)));
-  delay(1000);
-  if (expected_position != current_pulse){
-    movement(expected_position > current_pulse);
+  delay(78);
+  if (target_pulses > pulses_motor){
+    movement();
+  }else{
+    reset_process();
   }
 }
