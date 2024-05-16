@@ -1,5 +1,5 @@
 {
-  "products":
+  "product":
   {
     "ba50049a-38d5-41ee-b0b6-64d93efa81f2":
     {
@@ -986,7 +986,7 @@
 
 
   },
-  "vision_hash":
+  "code_name":
   {
     "AIRWICK":"cb39225c-d9ff-41dd-ad70-206845893985",
     "AJAX-BLEACH-14OZ": "620c8e52-e48a-4c43-b524-685df6aeee01",
