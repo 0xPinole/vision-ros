@@ -1,10 +1,9 @@
 """This main node creates a service who publish requested movements over the full procedure on ."""
 
-import json
-
-
 import rclpy
 from rclpy.node import Node
+
+from time import sleep
 
 from vision_interfaces.srv import VisionParams
 from vision_interfaces.srv import Procedure
@@ -86,15 +85,22 @@ class VisionService(Node):
         return response
 
 def main():
-    """Init ros2 and node of vision service."""
+    """
+    This function initializes the ROS 2 node and keeps it spinning to handle callbacks.
+    It ensures the node is properly shut down when the program exits.
+    """
     rclpy.init()
-    service = VisionService()
 
-    rclpy.spin(service)
-    service.destroy_node()
+    node_launcher = Procedure()
+
+    rclpy.spin(node_launcher)
+
+    node_launcher.destroy_node()
     rclpy.shutdown()
 
-
 if __name__ == "__main__":
-    """Run main fun."""
+    """
+    Entry point for the script. If the script is run directly,
+    the main() function will be executed.
+    """
     main()

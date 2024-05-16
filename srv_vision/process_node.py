@@ -1,7 +1,10 @@
 from vision_interfaces.srv import Procedure
 from vision_interfaces.msg import PositionalFrame
+
 from std_msgs.msg import Int8
+
 from geometry_msgs.msg import Pose2D
+
 import numpy as np
 
 class Procedure(Node):
@@ -12,8 +15,6 @@ class Procedure(Node):
     to predict the model for the products on frame.
     """
     self.evaluate = False
-    self.aisle = -1
-    self.shelf = -1
     self.frame = None
 
     def __init__(self):
@@ -44,6 +45,29 @@ class Procedure(Node):
         self.evaluate = request.capture
         self.positionalframe_msg.aisle = request.aisle
         self.positionalframe_msg.shelf = request.shelf
+        self.positionalframe_msg.x = request.x
 
         response.status_code = 1
         return response
+
+
+def main():
+    """
+    This function initializes the ROS 2 node and keeps it spinning to handle callbacks.
+    It ensures the node is properly shut down when the program exits.
+    """
+    rclpy.init()
+
+    node_launcher = Procedure()
+
+    rclpy.spin(node_launcher)
+
+    node_launcher.destroy_node()
+    rclpy.shutdown()
+
+if __name__ == "__main__":
+    """
+    Entry point for the script. If the script is run directly,
+    the main() function will be executed.
+    """
+    main()
