@@ -9,137 +9,41 @@ class Shelves:
     """Class owner of storage of shelves toml file."""
 
     def __init__(self):
-        """WIP."""
-        self._load_shelves()
+        """On initialization of the class, it reads all data on the database,
+        their methods, will permit to acces only the requested data, there is
+        no permited to write data on this database file."""
+        self.load_shelves()
 
-    def __enter__(self):
-        """WIP."""
-        pass
-
-    def __exit__(self, exception_type, exception_val, trace):
-        """WIP."""
-        return True
-
-    def _load_shelves(self):
-        """Read and get the toml file of shelves."""
-        with open(
-            "/home/pinole/ros2_ws/src/srv_vision/srv_vision/db/shelves_trace.json", "r"
-        ) as fg:
+    def load_shelves(self):
+        """"Read and local save the full shelves file."""
+        with open("/home/pinole/ros2_ws/src/srv_vision/srv_vision/db/shelves_trace.json", "r") as fg:
             self.shelves = json.load(fg)
-
-    def _search_index(
-        self, array: list[dict[str, any]], match_key: str, match_value: any
-    ) -> int:
-        """Get index for seacrh over list of dictionaries."""
-        if array is None:
-            return None
-        for index, value in enumerate(array):
-            if value.get(match_key) == match_value:
-                return index
-        return None
-
-    def get_shelves(self) -> dict[str, any]:
-        """Get complete schemer."""
-        return self.shelves
-
-    def search_shelves(self, aisle: int, shelf: int, section: int) -> list[int]:
-        """Get distances of specific schemer location."""
-        id_aisle = self._search_index(self.shelves.get("schemer"), "aisle_index", aisle)
-        if id_aisle is None:
-            return None
-
-        db_aisle = self.shelves["schemer"][id_aisle]
-        if db_aisle.get("enable") is False:
-            return None
-
-        id_shelves = self._search_index(db_aisle["shelves"], "shelf_index", shelf)
-        if id_shelves is None:
-            return None
-
-        db_shelves = db_aisle["schemer"][id_shelves]
-        if db_shelves.get("enable") is False:
-            return None
-
-        id_section = self._search_index(
-            db_shelves["sections"], "section_index", section
-        )
-        if id_section is None:
-            return None
-
-        db_section = db_shelves["sections"][id_section]
-        if db_section.get("enable") is False:
-            return None
-        distances = db_section.get("distances")
-        return distances
 
     def search_by_aruco_id(self, aruco_id: int) -> list[list[int]]:
         """Search by the aruco_id to get the distances to go down."""
-        positions = self.shelves["aruco_id"][str(aruco_id)]
-        return positions
-        # Return [[aisle, shelf, section], ...], should work with left and right
-        # by len(return) === 1 or 2
+        shelf = self.shelves["aruco_id"][str(aruco_id)]
+        return shelf
 
 
 class Products:
-    """Class owner of storage products on json file."""
+    """WIP"""
 
     def __init__(self):
         """WIP."""
-        self._load_product_list()
+        self.load_products()
 
-    def __enter__(self):
-        """WIP."""
-        pass
-
-    def __exit__(self, exception_type, exception_val, trace):
-        """WIP."""
-        self._dump_product_list(self.products)
-        return True
-
-    def _load_product_list(self):
+    def load_product_list(self):
         """Load products from json database."""
-        with open(
-            "/home/roser/ros2_ws/src/srv_vision/srv_vision/db/products.json", "r"
-        ) as fg:
+        with open("/home/pinole/ros2_ws/src/srv_vision/srv_vision/db/products.json", "r") as fg:
             self.products = json.load(fg)
 
-    def _dump_product_list(self, products_json: dict[str, any]):
-        """Overwrite json database."""
-        with open(
-            "/home/roser/ros2_ws/src/srv_vision/srv_vision/db/products.json", "w"
-        ) as fg:
-            json.dump(products_json, fg)
-
-    def get_product_by_uuid(self, query: str) -> dict[str, any]:
-        """Return the product information."""
-        product = self.products["products"].get(query)
-        return product
-
-    def get_product_by_hash_vision(self, query: str) -> dict[str, any]:
+    def get_product_information(self, query: str) -> dict[str, any]:
         """WIP."""
-        uuid = self.products["vision_hash"].get(query)
+        uuid = self.products["code_name"].get(query)
         if uuid is None:
             return None
-        product = self.get_product_by_uuid(uuid)
+        product = self.products["product"].get(uuid)
         return product
-
-    def insert_product(self, product_information: dict[str, any]) -> str:
-        """Return uuid of insertion."""
-        while True:
-            uuid = uuid4()
-            if self.products["products"].get(uuid) is None:
-                self.producs["products"][uuid] = product_information
-                return uuid
-
-    def search_product_name(self, name: str) -> list[list[str]]:
-        """Search product by has in name."""
-        response = []
-        for uuid, product in self.products["products"].items():
-            if name in product["name"]:
-                response.append(
-                    [uuid, product["name"], product["variety"], product["plu"]]
-                )
-        return response
 
 
 class Logs:
@@ -148,15 +52,6 @@ class Logs:
     def __init__(self):
         """WIP."""
         self._load_logger()
-
-    def __enter__(self):
-        """WIP."""
-        pass
-
-    def __exit__(self, exception_type, exception_val, trace):
-        """WIP."""
-        self._dump_logger(self.logs)
-        return True
 
     def _load_logger(self):
         """Load products from json database."""

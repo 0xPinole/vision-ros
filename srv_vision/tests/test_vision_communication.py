@@ -9,10 +9,10 @@ with open("/home/pinole/ros2_ws/src/srv_vision/srv_vision/db/products.json", "r"
 
 def get_product_by_hash_vision(query: str) -> dict[str, any]:
     """WIP."""
-    uuid = products["vision_hash"].get(query)
+    uuid = products["code_name"].get(query)
     if uuid is None:
         return None
-    product = products["products"].get(uuid)
+    product = products["product"].get(uuid)
     return product
 
 def format_product(vision_hash: str, stock: str, aisle: str, rack: str):

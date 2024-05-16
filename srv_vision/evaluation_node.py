@@ -53,7 +53,6 @@ class Evaluation(Node):
             detection.y_2 = frame_base_y + y_2
             self.data_pub.publish(detection)
 
-
 def main():
     """
     This function initializes the ROS 2 node and keeps it spinning to handle callbacks.

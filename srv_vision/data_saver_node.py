@@ -11,7 +11,7 @@ from srv_vision.storage_manager import Logs
 from vision_interfaces.srv import DataParams
 
 
-class DataSaver(Node):
+class Data(Node):
     """WIP."""
 
     def __init__(self):
