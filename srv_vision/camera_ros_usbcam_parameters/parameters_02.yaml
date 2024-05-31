@@ -1,0 +1,24 @@
+/**:
+    ros__parameters:
+      video_device: "/dev/video2"
+      framerate: 30.0
+      io_method: "mmap"
+      frame_id: "camera"
+      pixel_format: "yuyv2rgb"  # see usb_cam/supported_formats for list of supported formats
+      av_device_format: "YUV422P"
+      image_width: 640
+      image_height: 480
+      camera_name: "distortion_02" #camera_info_url: "package://usb_cam/config/camera_info.yaml"
+      brightness: 128
+      contrast: 32
+      saturation: 64
+      sharpness: 2
+      gain: 4
+      auto_white_balance: false
+      white_balance: -1
+      autoexposure: false
+      exposure: -1
+      autofocus: false
+      focus: -1
+# data: [0.39571734386167934,  -1.3772949664704914,  -0.08720145985934195, 0.022250126615019107, 2.1731201213242843]
+# data: [677.210884142845, 0.0, 401.4472274534166, 0.0, 704.440895337166, 202.26702398944684, 0.0, 0.0, 1.0]
