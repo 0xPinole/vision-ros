@@ -21,10 +21,12 @@ setup(
     tests_require=["pytest"],
     entry_points={
         'console_scripts': [
-            'vision = srv_vision.vision_service:main',
-            'composed = srv_vision.compose:main',
-            'data_saver = srv_vision.data_saver_node:main',
-            'model = srv_vision.model_manager:main'
+            'node_service = srv_vision.vision_service:main',
+            'node_analize = srv_vision.analize_node:main',
+            'node_procedure = srv_vision.process_node:main',
+            'node_evaluation = srv_vision.evaluation_node:main',
+            'node_data = srv_vision.data_node:main',
+            'service_compose = srv_vision.compose:main'
         ],
     },
 )

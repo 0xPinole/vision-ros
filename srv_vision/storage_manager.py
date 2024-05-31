@@ -24,7 +24,7 @@ class Products:
     def __init__(self):
         self.load_products()
 
-    def load_product_list(self):
+    def load_products(self):
         with open("/home/pinole/ros2_ws/src/srv_vision/srv_vision/db/products.json", "r") as fg:
             self.products = json.load(fg)
 
@@ -35,6 +35,9 @@ class Products:
         product = self.products["product"].get(uuid)
         return product
 
+    def get_code_name(self):
+        return list(self.products["code_name"].keys())
+
 
 class EvaluationsDB:
     def __init__(self):
@@ -44,12 +47,13 @@ class EvaluationsDB:
         with open("/home/pinole/ros2_ws/src/srv_vision/srv_vision/db/evaluations.json", "r") as fg:
             self.logs = json.load(fg)
 
-    def write_file(self, logs_json: dict[str, any]):
+    def write_file(self):
         with open("/home/pinole/ros2_ws/src/srv_vision/srv_vision/db/evaluations.json", "w") as fg:
             json.dump(self.logs, fg)
 
     def save_capture(self, code_name: str, data: dict[str, any]):
-        last_timestamp = self.logs["detections"][-1]["timestamp"]
+        self.read_file()
+        last_timestamp = self.logs["execution"][-1]["timestamp"]
         last_timestamp = datetime.datetime.strptime(last_timestamp, "%Y-%m-%d %H:%M:%S")
         now_timestamp = datetime.datetime.now()
 
@@ -69,6 +73,7 @@ class EvaluationsDB:
         self.write_file()
 
     def save_fetch(self, code_name: str, data: dict[str, any]):
+        self.read_file()
         self.logs["execution"][-1]["fetch"][code_name] = data
         self.write_file()
 

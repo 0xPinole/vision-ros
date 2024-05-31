@@ -1,0 +1,22 @@
+/**:
+    ros__parameters:
+      video_device: "/dev/video2"
+      framerate: 30.0
+      io_method: "mmap"
+      frame_id: "camera"
+      pixel_format: "yuyv2rgb"  # see usb_cam/supported_formats for list of supported formats
+      av_device_format: "YUV422P"
+      image_width: 640
+      image_height: 480
+      camera_name: "test_camera" #camera_info_url: "package://usb_cam/config/camera_info.yaml"
+      brightness: 128
+      contrast: 32
+      saturation: 64
+      sharpness: 2
+      gain: 4
+      auto_white_balance: false
+      white_balance: -1
+      autoexposure: false
+      exposure: -1
+      autofocus: false
+      focus: -1

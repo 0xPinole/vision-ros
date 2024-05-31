@@ -725,10 +725,10 @@
 },
 "a3976446-b241-4d7a-a451-7d855f5616dc": {
   "plu": "43152020656",
-  "name": "Chloralen Laundry (possibly)",
+  "name": "Chloralen Laundry",
   "brand": "Chloralen",
   "content": "650 ml (milliliters)",
-  "type": "Laundry Bleach (possible)",
+  "type": "Laundry Bleach",
   "category": "Cleaning Supplies",
   "variety": "",
   "description": "**Due to limited information and the possibility of brand localization, the following product information is tentative.** Chloralen Laundry Bleach is a chlorine-based bleach that may be used to whiten whites, remove stains, and disinfect laundry.  **Always consult the specific product label for detailed instructions and safety warnings before using Chloralen Laundry Bleach.**",
@@ -1015,9 +1015,6 @@
     "SALVO-LIMON-500ML": "f9044f9a-82ea-474c-8e00-545aca784321",
     "WINDEX-ORIGINAL-23OZ": "fb8aa26a-64c2-42c2-aef8-533864430c30",
     "ZIPLOC-40-UND": "067fffe8-e2ea-4dd5-8de0-397c9d243f20",
-    "palmolive":"24f56d61-40ff-4fbc-a296-3edfea3cc285",
-
-    "u-ARIEL D.P./2KG": "972fd597-7106-45af-bea6-852b46feedd4",
-    "default": "ba50049a-38d5-41ee-b0b6-64d93efa81f2"
+    "palmolive":"24f56d61-40ff-4fbc-a296-3edfea3cc285"
   }
 }
