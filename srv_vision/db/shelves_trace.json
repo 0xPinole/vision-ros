@@ -1,0 +1,44 @@
+{
+  "title": "Shelves path Tracer",
+
+  "aruco_id": {
+    "1": {
+      "left": {
+        "aisle": 1,
+        "shelf": 1,
+        "setpoints": [10, 20, 30, 40, 50]
+      },
+      "right": {
+        "aisle": 1,
+        "shelf": 4,
+        "setpoints": [30, 45]
+      },
+      "state": "start"
+    },
+    "2": {
+      "left": {
+        "aisle": 1,
+        "shelf": 2,
+        "setpoints": [10, 20, 30, 40, 50]
+      },
+      "right": {
+        "aisle": 1,
+        "shelf": 4,
+        "setpoints": [30, 45]
+      }
+    },
+    "3": {
+      "left": {
+        "aisle": 1,
+        "shelf": 3,
+        "setpoints": [10, 10]
+      },
+      "right": {
+        "aisle": 1,
+        "shelf": 5,
+        "setpoints": [0, 50]
+      },
+      "state": "finish"
+    }
+  }
+}

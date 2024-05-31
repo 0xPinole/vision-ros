@@ -1,0 +1,58 @@
+127.0.0.1 - - [27/May/2024 08:45:52] "POST / HTTP/1.1" 200 -
+b'"{\\"PLU\\": \\"810000000000\\", \\"Product\\": \\"Comet Cleanser (unspecified variety)\\", \\"Type\\": \\"\\", \\"Aisle\\": \\"1\\", \\"Rack\\": \\"1\\", \\"AmountS\\": \\"1\\", \\"AmountF\\": \\"2\\", \\"Supply\\": true}"'
+127.0.0.1 - - [27/May/2024 08:45:52] "POST / HTTP/1.1" 200 -
+b'"{\\"PLU\\": \\"62338813974\\", \\"Product\\": \\"Easy-Off Oven Cleaner\\", \\"Type\\": \\"Heavy Duty (possible, but depends on specific product type)\\", \\"Aisle\\": \\"1\\", \\"Rack\\": \\"1\\", \\"AmountS\\": \\"2\\", \\"AmountF\\": \\"2\\", \\"Supply\\": false}"'
+127.0.0.1 - - [27/May/2024 08:45:52] "POST / HTTP/1.1" 200 -
+b'"{\\"PLU\\": \\"97464903053\\", \\"Product\\": \\"JUBILE BIG ROLL\\", \\"Type\\": \\"Perforated\\", \\"Aisle\\": \\"1\\", \\"Rack\\": \\"1\\", \\"AmountS\\": \\"3\\", \\"AmountF\\": \\"3\\", \\"Supply\\": false}"'
+127.0.0.1 - - [27/May/2024 08:45:52] "POST / HTTP/1.1" 200 -
+b'"{\\"PLU\\": \\"19200771825\\", \\"Product\\": \\"Lysol Disinfecting Wipes\\", \\"Type\\": \\"\\", \\"Aisle\\": \\"1\\", \\"Rack\\": \\"4\\", \\"AmountS\\": \\"4\\", \\"AmountF\\": \\"4\\", \\"Supply\\": false}"'
+127.0.0.1 - - [27/May/2024 08:49:06] "POST / HTTP/1.1" 200 -
+b'"{\\"PLU\\": \\"19200771825\\", \\"Product\\": \\"Lysol Disinfecting Wipes\\", \\"Type\\": \\"\\", \\"Aisle\\": \\"1\\", \\"Rack\\": \\"4\\", \\"AmountS\\": \\"5\\", \\"AmountF\\": \\"4\\", \\"Supply\\": false}"'
+127.0.0.1 - - [27/May/2024 08:49:06] "POST / HTTP/1.1" 200 -
+b'"{\\"PLU\\": \\"7500000000000\\", \\"Product\\": \\"Salvo Lim\\\\u00f3n Dishwashing Liquid\\", \\"Type\\": \\"Lemon Scent\\", \\"Aisle\\": \\"1\\", \\"Rack\\": \\"2\\", \\"AmountS\\": \\"6\\", \\"AmountF\\": \\"0\\", \\"Supply\\": false}"'
+127.0.0.1 - - [27/May/2024 08:49:06] "POST / HTTP/1.1" 200 -
+b'"{\\"PLU\\": \\"96619321544\\", \\"Product\\": \\"KIRKLAND TOWEL ROLL\\", \\"Type\\": \\"Perforated\\", \\"Aisle\\": \\"1\\", \\"Rack\\": \\"2\\", \\"AmountS\\": \\"7\\", \\"AmountF\\": \\"0\\", \\"Supply\\": false}"'
+127.0.0.1 - - [27/May/2024 08:49:06] "POST / HTTP/1.1" 200 -
+b'"{\\"PLU\\": \\"30772081242\\", \\"Product\\": \\"Dawn Ultra Dish Soap Dishwashing Liquid\\", \\"Type\\": \\"\\", \\"Aisle\\": \\"1\\", \\"Rack\\": \\"2\\", \\"AmountS\\": \\"8\\", \\"AmountF\\": \\"2\\", \\"Supply\\": false}"'
+127.0.0.1 - - [27/May/2024 08:51:46] "POST / HTTP/1.1" 200 -
+b'"{\\"PLU\\": \\"43152020656\\", \\"Product\\": \\"Chloralen Laundry\\", \\"Type\\": \\"\\", \\"Aisle\\": \\"1\\", \\"Rack\\": \\"3\\", \\"AmountS\\": \\"9\\", \\"AmountF\\": \\"2\\", \\"Supply\\": false}"'
+127.0.0.1 - - [27/May/2024 08:51:46] "POST / HTTP/1.1" 200 -
+b'"{\\"PLU\\": \\"97464901400\\", \\"Product\\": \\"Melody Napkins 180 Count\\", \\"Type\\": \\"Unknown variety (specify ply or count if available)\\", \\"Aisle\\": \\"1\\", \\"Rack\\": \\"3\\", \\"AmountS\\": \\"10\\", \\"AmountF\\": \\"0\\", \\"Supply\\": false}"'
+127.0.0.1 - - [27/May/2024 08:51:46] "POST / HTTP/1.1" 200 -
+b'"{\\"PLU\\": \\"96619194254\\", \\"Product\\": \\"Kirkland Signature Bath Tissue\\", \\"Type\\": \\"Unknown variety (specify ply or scent if available)\\", \\"Aisle\\": \\"1\\", \\"Rack\\": \\"5\\", \\"AmountS\\": \\"11\\", \\"AmountF\\": \\"1\\", \\"Supply\\": false}"'
+127.0.0.1 - - [27/May/2024 08:52:16] "POST / HTTP/1.1" 200 -
+b'"{\\"PLU\\": \\"200000\\", \\"Product\\": \\"Air Wick Turquoise Oasis Refill (21ml)\\", \\"Type\\": \\"\\", \\"Aisle\\": \\"0\\", \\"Rack\\": \\"0\\", \\"AmountS\\": \\"0\\", \\"AmountF\\": \\"3\\", \\"Supply\\": true}"'
+127.0.0.1 - - [27/May/2024 08:52:16] "POST / HTTP/1.1" 200 -
+b'"{\\"PLU\\": \\"35000053602\\", \\"Product\\": \\"Ajax Bleach Cleaner\\", \\"Type\\": \\"Likely Chlorine Bleach (check label for confirmation)\\", \\"Aisle\\": \\"0\\", \\"Rack\\": \\"0\\", \\"AmountS\\": \\"0\\", \\"AmountF\\": \\"3\\", \\"Supply\\": true}"'
+127.0.0.1 - - [27/May/2024 08:52:16] "POST / HTTP/1.1" 200 -
+b'"{\\"PLU\\": \\"99176263913\\", \\"Product\\": \\"Axion Lim\\\\u00f3n Fabric Softener 425g\\", \\"Type\\": \\"Lim\\\\u00f3n (Lemon)\\", \\"Aisle\\": \\"0\\", \\"Rack\\": \\"0\\", \\"AmountS\\": \\"0\\", \\"AmountF\\": \\"7\\", \\"Supply\\": true}"'
+127.0.0.1 - - [27/May/2024 08:52:16] "POST / HTTP/1.1" 200 -
+b'"{\\"PLU\\": \\"43152007565\\", \\"Product\\": \\"Clorox Disinfecting Bleach\\", \\"Type\\": \\"Sodium Hypochlorite Bleach\\", \\"Aisle\\": \\"0\\", \\"Rack\\": \\"0\\", \\"AmountS\\": \\"0\\", \\"AmountF\\": \\"2\\", \\"Supply\\": true}"'
+127.0.0.1 - - [27/May/2024 08:52:16] "POST / HTTP/1.1" 200 -
+b'"{\\"PLU\\": \\"7510000000000\\", \\"Product\\": \\"Fabuloso Multi-Purpose Cleaner (Green)\\", \\"Type\\": \\"\\", \\"Aisle\\": \\"0\\", \\"Rack\\": \\"0\\", \\"AmountS\\": \\"0\\", \\"AmountF\\": \\"0\\", \\"Supply\\": false}"'
+127.0.0.1 - - [27/May/2024 08:52:16] "POST / HTTP/1.1" 200 -
+b'"{\\"PLU\\": \\"100000\\", \\"Product\\": \\"Fabuloso Multi-Purpose Cleaner Lavender Scent (56 oz)\\", \\"Type\\": \\"\\", \\"Aisle\\": \\"0\\", \\"Rack\\": \\"0\\", \\"AmountS\\": \\"0\\", \\"AmountF\\": \\"0\\", \\"Supply\\": false}"'
+127.0.0.1 - - [27/May/2024 08:52:16] "POST / HTTP/1.1" 200 -
+b'"{\\"PLU\\": \\"7510000000000\\", \\"Product\\": \\"Fabuloso Multi-Purpose Cleaner (Primaveral)\\", \\"Type\\": \\"\\", \\"Aisle\\": \\"0\\", \\"Rack\\": \\"0\\", \\"AmountS\\": \\"0\\", \\"AmountF\\": \\"0\\", \\"Supply\\": false}"'
+127.0.0.1 - - [27/May/2024 08:52:17] "POST / HTTP/1.1" 200 -
+b'"{\\"PLU\\": \\"7510000000000\\", \\"Product\\": \\"Fabuloso Multi-Purpose Cleaner (Red)\\", \\"Type\\": \\"\\", \\"Aisle\\": \\"0\\", \\"Rack\\": \\"0\\", \\"AmountS\\": \\"0\\", \\"AmountF\\": \\"0\\", \\"Supply\\": false}"'
+127.0.0.1 - - [27/May/2024 08:52:17] "POST / HTTP/1.1" 200 -
+b'"{\\"PLU\\": \\"12587703526\\", \\"Product\\": \\"Glad Tall Kitchen Trash Bags\\", \\"Type\\": \\"Tall Kitchen (39 gallons)\\", \\"Aisle\\": \\"0\\", \\"Rack\\": \\"0\\", \\"AmountS\\": \\"0\\", \\"AmountF\\": \\"0\\", \\"Supply\\": false}"'
+127.0.0.1 - - [27/May/2024 08:52:17] "POST / HTTP/1.1" 200 -
+b'"{\\"PLU\\": \\"19200997843\\", \\"Product\\": \\"Lysol Disinfectant Spray\\", \\"Type\\": \\"Likely Crisp Linen Scent (check label for confirmation)\\", \\"Aisle\\": \\"0\\", \\"Rack\\": \\"0\\", \\"AmountS\\": \\"0\\", \\"AmountF\\": \\"0\\", \\"Supply\\": false}"'
+127.0.0.1 - - [27/May/2024 08:52:17] "POST / HTTP/1.1" 200 -
+b'"{\\"PLU\\": \\"809000000000\\", \\"Product\\": \\"Kirkland Signature Paper Napkins\\", \\"Type\\": \\"Unknown variety (specify ply or count if available)\\", \\"Aisle\\": \\"0\\", \\"Rack\\": \\"0\\", \\"AmountS\\": \\"0\\", \\"AmountF\\": \\"0\\", \\"Supply\\": false}"'
+127.0.0.1 - - [27/May/2024 08:52:17] "POST / HTTP/1.1" 200 -
+b'"{\\"PLU\\": \\"74729320206\\", \\"Product\\": \\"Oven Bags\\", \\"Type\\": \\"Unknown variety (specify size if available)\\", \\"Aisle\\": \\"0\\", \\"Rack\\": \\"0\\", \\"AmountS\\": \\"0\\", \\"AmountF\\": \\"0\\", \\"Supply\\": false}"'
+127.0.0.1 - - [27/May/2024 08:52:17] "POST / HTTP/1.1" 200 -
+b'"{\\"PLU\\": \\"809000000000\\", \\"Product\\": \\"Reynolds Oven Bags (package size unspecified)\\", \\"Type\\": \\"\\", \\"Aisle\\": \\"0\\", \\"Rack\\": \\"0\\", \\"AmountS\\": \\"0\\", \\"AmountF\\": \\"0\\", \\"Supply\\": false}"'
+127.0.0.1 - - [27/May/2024 08:52:17] "POST / HTTP/1.1" 200 -
+b'"{\\"PLU\\": \\"43152007237\\", \\"Product\\": \\"Pinale\\\\u00f1o Light Tuna in Water 28 Fluid Ounces\\", \\"Type\\": \\"Light Tuna (in Water)\\", \\"Aisle\\": \\"0\\", \\"Rack\\": \\"0\\", \\"AmountS\\": \\"0\\", \\"AmountF\\": \\"0\\", \\"Supply\\": false}"'
+127.0.0.1 - - [27/May/2024 08:52:17] "POST / HTTP/1.1" 200 -
+b'"{\\"PLU\\": \\"10900080316\\", \\"Product\\": \\"Reynolds Wrap Aluminum Foil 30 Square Feet\\", \\"Type\\": \\"\\", \\"Aisle\\": \\"0\\", \\"Rack\\": \\"0\\", \\"AmountS\\": \\"0\\", \\"AmountF\\": \\"0\\", \\"Supply\\": false}"'
+127.0.0.1 - - [27/May/2024 08:52:17] "POST / HTTP/1.1" 200 -
+b'"{\\"PLU\\": \\"19800701956\\", \\"Product\\": \\"Windex Original Glass Cleaner\\", \\"Type\\": \\"\\", \\"Aisle\\": \\"0\\", \\"Rack\\": \\"0\\", \\"AmountS\\": \\"0\\", \\"AmountF\\": \\"0\\", \\"Supply\\": false}"'
+127.0.0.1 - - [27/May/2024 08:52:17] "POST / HTTP/1.1" 200 -
+b'"{\\"PLU\\": \\"25700711445\\", \\"Product\\": \\"Ziploc Gallon Bags 40 Count\\", \\"Type\\": \\"Gallon\\", \\"Aisle\\": \\"0\\", \\"Rack\\": \\"0\\", \\"AmountS\\": \\"0\\", \\"AmountF\\": \\"0\\", \\"Supply\\": false}"'
+127.0.0.1 - - [27/May/2024 08:52:17] "POST / HTTP/1.1" 200 -
+b'"{\\"PLU\\": \\"35000463036\\", \\"Product\\": \\"Palmolive Original Dish Liquid\\", \\"Type\\": \\"\\", \\"Aisle\\": \\"0\\", \\"Rack\\": \\"0\\", \\"AmountS\\": \\"0\\", \\"AmountF\\": \\"2\\", \\"Supply\\": true}"'

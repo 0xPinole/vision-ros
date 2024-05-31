@@ -7,7 +7,7 @@ __pycache__/
 *.so
 
 # pt model yolo 
-*.pt 
+# *.pt 
 
 # Distribution / packaging
 .Python
