@@ -26,8 +26,7 @@ setup(
             'node_procedure = srv_vision.process_node:main',
             'node_evaluation = srv_vision.evaluation_node:main',
             'node_data = srv_vision.data_node:main',
-            'service_compose = srv_vision.compose:main',
-            'testing = srv_vision.camera_raw_topic_sub:main'
+            'service_compose = srv_vision.compose:main'
         ],
     },
 )
